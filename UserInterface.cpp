@@ -1,21 +1,44 @@
 #include "UserInterface.h"
 #include "RzadkiWektor.h"
 
+bool isNumber(const std::string &x) {
+    std::regex e("^-?\\d+");
+    return std::regex_match(x, e);
+}
+
+int getIntegerInput() {
+    std::string input;
+    bool isNumeric;
+    do {
+        std::cin >> input;
+        isNumeric = isNumber(input);
+        if (!isNumeric)
+            std::cout << "Please enter valid numeric input" << std::endl;
+    } while (!isNumeric);
+    return std::stoi(input);
+}
 
 //TODO Validate instructions
 int readInput(std::string *function, int *firstVal, int *secondVal) {
     bool validInstruction = false;
     std::string instruction;
-    int first, second;
 
-    std::cin >> instruction;
+    while (!validInstruction) {
+        std::cin >> instruction;
+        validInstruction = true;
 
-    if (instruction == MVEC_INSTRUCTION || instruction == DEF_INSTRUCTION)
-        std::cin >> *firstVal >> *secondVal;
-    else if (instruction == LEN_INSTRUCTION)
-        std::cin >> *firstVal;
-
-    *function = instruction;
+        if (instruction == MVEC_INSTRUCTION || instruction == DEF_INSTRUCTION) {
+            *firstVal = getIntegerInput();
+            *secondVal = getIntegerInput();
+        } else if (instruction == LEN_INSTRUCTION)
+            *firstVal = getIntegerInput();
+        else if (instruction == PRINT_INSTRUCTION || instruction == DEL_INSTRUCTION || instruction == QUIT_INSTRUCTION)
+            *function = instruction;
+        else {
+            std::cout << "Cannot find instruction" << std::endl;
+            validInstruction = false;
+        }
+    }
 
     return NO_ERROR;
 }

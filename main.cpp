@@ -3,6 +3,13 @@
 #include "UserInterface.h"
 
 
+bool isVectorValid(int *offsets, int *values) {
+    bool valid = offsets != nullptr && values != nullptr;
+    if (!valid)
+        std::cout << "You should initialize vector first (with mvec)!\n";
+    return valid;
+}
+
 int main() {
     std::cout << "Hello, we will start using vectors!" << std::endl;
 
@@ -16,7 +23,7 @@ int main() {
     std::string userInstruction;
     int arg1, arg2;
 
-    while (userInstruction != "quit") {
+    while (userInstruction != QUIT_INSTRUCTION) {
 
         showInterface(&userInstruction, &arg1, &arg2);
 
@@ -27,11 +34,14 @@ int main() {
             resize(offsets, tableSize, &vectorSize, arg1);
             changeDefaultValues(offsets, tableSize, &defaultValue, arg2);
         } else if (userInstruction == LEN_INSTRUCTION) {
-            resize(offsets, tableSize, &vectorSize, arg1);
+            if (isVectorValid(offsets, values))
+                resize(offsets, tableSize, &vectorSize, arg1);
         } else if (userInstruction == DEF_INSTRUCTION) {
-            addValue(values, offsets, &tableSize, vectorSize, arg1, arg2);
+            if (isVectorValid(offsets, values))
+                addValue(values, offsets, &tableSize, vectorSize, arg1, arg2);
         } else if (userInstruction == PRINT_INSTRUCTION) {
-            std::cout << getValues(values, offsets, defaultValue, vectorSize, tableSize) << std::endl;
+            if (isVectorValid(offsets, values))
+                std::cout << getValues(values, offsets, defaultValue, vectorSize, tableSize) << std::endl;
         } else if (userInstruction == DEL_INSTRUCTION) {
             clean(values, offsets);
         }
