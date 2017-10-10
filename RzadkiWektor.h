@@ -1,9 +1,9 @@
+#ifndef ZAAWANSOWANEMETODYPROGRAMOWANIAOBIEKTOWEGO_RZADKIWEKTOR_H
+#define ZAAWANSOWANEMETODYPROGRAMOWANIAOBIEKTOWEGO_RZADKIWEKTOR_H
+
 #include <string>
 #include <algorithm>
 #include <iterator>
-
-#ifndef ZAAWANSOWANEMETODYPROGRAMOWANIAOBIEKTOWEGO_RZADKIWEKTOR_H
-#define ZAAWANSOWANEMETODYPROGRAMOWANIAOBIEKTOWEGO_RZADKIWEKTOR_H
 
 #define VECTOR_TYPE int
 
@@ -31,5 +31,6 @@ int addValue(VECTOR_TYPE*& values, int*& offsets, int* tableSize, int vectorSize
 
 int clean(VECTOR_TYPE*& values, int*& offsets);
 
-int resize(const VECTOR_TYPE* values, const int* offsets, int *tableSize, int *currentVectorSize, int newVectorSize);
+int resize(int* offsets, int tableSize, int *currentVectorSize, int newVectorSize);
+
 #endif //ZAAWANSOWANEMETODYPROGRAMOWANIAOBIEKTOWEGO_RZADKIWEKTOR_H

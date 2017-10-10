@@ -4,7 +4,13 @@
 #include <iostream>
 #include <string>
 
-static const std::string POSSIBLE_FUNCTIONS[5] = {"mvec", "len", "def", "print", "del"};
+static const char* MVEC_INSTRUCTION = "mvec";
+static const char* LEN_INSTRUCTION = "len";
+static const char* DEF_INSTRUCTION = "def";
+static const char* PRINT_INSTRUCTION = "print";
+static const char* DEL_INSTRUCTION = "del";
+
+
 static const char* MENU_TEXT = "\nWITAM W PROGRAMIE DO WEKTORA RZADKIEGO!\n\n"
         "1) mvec <len> <def> - wykonanie polecenia usuwa istniejący wektor rzadki (jeśli jakiś istnieje)\n"
         "i tworzy nowy wektor, o długości <len> i wartości domyślnej wektora rzadkiego <def>\n"

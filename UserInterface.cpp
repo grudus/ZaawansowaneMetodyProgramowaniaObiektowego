@@ -10,9 +10,9 @@ int readInput(std::string *function, int *firstVal, int *secondVal) {
 
     std::cin >> instruction;
 
-    if (instruction == POSSIBLE_FUNCTIONS[0] || instruction == POSSIBLE_FUNCTIONS[2])
+    if (instruction == MVEC_INSTRUCTION || instruction == DEF_INSTRUCTION)
         std::cin >> *firstVal >> *secondVal;
-    else if (instruction == POSSIBLE_FUNCTIONS[1])
+    else if (instruction == LEN_INSTRUCTION)
         std::cin >> *firstVal;
 
     *function = instruction;

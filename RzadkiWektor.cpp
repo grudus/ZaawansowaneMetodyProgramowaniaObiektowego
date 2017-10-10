@@ -1,8 +1,5 @@
 #include "RzadkiWektor.h"
 
-void resizeTablesIfNeeded(const int *pInt, const int *offsets, int *size);
-
-int findFreeOffsetIndex(int *&pInt);
 
 int init(VECTOR_TYPE *&values, int *&offsets, VECTOR_TYPE defaultValue, int *tableSize) {
     *tableSize = DEFAULT_SIZE;
@@ -95,8 +92,13 @@ int addValue(VECTOR_TYPE *&values, int *&offsets, int *tableSize, int vectorSize
 }
 
 
-//TODO implement
-int resize(const VECTOR_TYPE *values, const int *offsets, int *tableSize, int *currentVectorSize, int newVectorSize) {
+int resize(int *offsets, int tableSize, int *currentVectorSize, int newVectorSize) {
+    if (*currentVectorSize > newVectorSize) {
+        for (int i = 0; i < tableSize; i++)
+            if (offsets[i] >= newVectorSize)
+                offsets[i] = OFFSET_EMPTY;
+    }
+
     *currentVectorSize = newVectorSize;
     return NO_ERROR;
 }
