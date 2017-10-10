@@ -19,25 +19,21 @@ int init(VECTOR_TYPE *&values, int *&offsets, VECTOR_TYPE defaultValue, int *tab
 
 std::string
 getValues(const VECTOR_TYPE *values, const int *offsets, VECTOR_TYPE defaultValue, int vectorSize, int tableSize) {
-    if (vectorSize < 0 || tableSize < 0) {
+    if (vectorSize < 0 || tableSize < 0)
         return _INVALID_SIZE;
-    }
-    std::string string = "len: " + std::to_string(vectorSize) + " values: ";
-    int currentOffsetIndex = 0;
 
+    std::string string = LENGTH_TEXT + std::to_string(vectorSize) + VALUES_TEXT;
 
+    VECTOR_TYPE *valuesArray = new VECTOR_TYPE[vectorSize];
+    std::fill_n(valuesArray, vectorSize, defaultValue);
+    for (int i = 0; i < tableSize; i++)
+        if (offsets[i] != OFFSET_EMPTY)
+            valuesArray[offsets[i]] = values[i];
 
-    for (int i = 0; i < vectorSize; i++) {
+    for (int i = 0; i < vectorSize; i++)
+        string += std::to_string(valuesArray[i]) + (i == vectorSize - 1 ? " " : ", ");
 
-        if (currentOffsetIndex < tableSize && offsets[currentOffsetIndex] != OFFSET_EMPTY && offsets[currentOffsetIndex] == i) {
-            string += std::to_string(values[currentOffsetIndex]);
-            ++currentOffsetIndex;
-        } else
-            string += std::to_string(defaultValue);
-
-        if (i < vectorSize - 1) string += ", ";
-    }
-
+    delete[] valuesArray;
     return string;
 }
 
@@ -71,7 +67,7 @@ void resizeTables(int *&values, int *&offsets, int *tableSize) {
     *tableSize = newSize;
 }
 
-int findFreeIndex(const int* offsets, int tableSize) {
+int findFreeIndex(const int *offsets, int tableSize) {
     int index = tableSize;
     for (int i = 0; i < tableSize && index == tableSize; i++) {
         if (offsets[i] == OFFSET_EMPTY) index = i;
@@ -96,4 +92,22 @@ int addValue(VECTOR_TYPE *&values, int *&offsets, int *tableSize, int vectorSize
     values[index] = newValue;
 
     return NO_ERROR;
+}
+
+
+//TODO implement
+int resize(const VECTOR_TYPE *values, const int *offsets, int *tableSize, int *currentVectorSize, int newVectorSize) {
+    *currentVectorSize = newVectorSize;
+    return NO_ERROR;
+}
+
+int clean(VECTOR_TYPE *&values, int *&offsets) {
+    if (values != nullptr) {
+        delete[] values;
+        values = nullptr;
+    }
+    if (offsets != nullptr) {
+        delete[] offsets;
+        offsets = nullptr;
+    }
 }
