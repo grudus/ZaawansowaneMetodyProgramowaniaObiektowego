@@ -10,6 +10,8 @@ static const char* LEN_INSTRUCTION = "len";
 static const char* DEF_INSTRUCTION = "def";
 static const char* PRINT_INSTRUCTION = "print";
 static const char* DEL_INSTRUCTION = "del";
+static const char* READ_INSTRUCTION = "read";
+static const char* RESET_INSTRUCTION = "reset";
 static const char* QUIT_INSTRUCTION = "quit";
 
 
@@ -23,6 +25,7 @@ static const char* MENU_TEXT = "\nWITAM W PROGRAMIE DO WEKTORA RZADKIEGO!\n\n"
         "* print – wykonanie polecenia wypisuje na ekran aktualny stan wektora rzadkiego\n"
         "* del – usuwa wszystkie dynamicznie alokowane zmienne dla wektor rzadkiego, jeśli wektor\n"
         "obecnie istnieje.\n"
+        "* reset <val> - zmienia wartosc wektora domyslnego"
         "* quit - end program";
 
 int showInterface(std::string* function, int* firstVal, int* secondVal);

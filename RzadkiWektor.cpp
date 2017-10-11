@@ -1,15 +1,17 @@
 #include "RzadkiWektor.h"
 
 
-int init(VECTOR_TYPE *&values, int *&offsets, VECTOR_TYPE defaultValue, int *tableSize) {
+int findFreeIndex(const int *offsets, int tableSize);
+
+void removeOffsetsAboveVectorSize(int *offsets, int tableSize, int newVectorSize);
+
+int init(VECTOR_TYPE *&values, int *&offsets, int *tableSize) {
     *tableSize = DEFAULT_SIZE;
     values = new int[*tableSize];
     offsets = new int[*tableSize];
 
-    for (int i = 0; i < DEFAULT_SIZE; i++) {
-        values[i] = defaultValue;
+    for (int i = 0; i < DEFAULT_SIZE; i++)
         offsets[i] = OFFSET_EMPTY;
-    }
 
     return NO_ERROR;
 }
@@ -36,7 +38,7 @@ getValues(const VECTOR_TYPE *values, const int *offsets, VECTOR_TYPE defaultValu
 
 int changeDefaultValues(const int *offsets, int tableSize, int *newValue, int value) {
     bool vectorClean = true;
-    for (int i = 0; i < tableSize; i++)
+    for (int i = 0; i < tableSize && vectorClean; i++)
         vectorClean = vectorClean && offsets[i] == OFFSET_EMPTY;
 
     if (vectorClean) *newValue = value;
@@ -53,16 +55,33 @@ void resizeTables(int *&values, int *&offsets, int *tableSize) {
         if (i < *tableSize) {
             newValues[i] = values[i];
             newOffsets[i] = offsets[i];
-        } else {
-            newValues[i] = 0;
+        } else
             newOffsets[i] = OFFSET_EMPTY;
-        }
     }
 
     values = newValues;
     offsets = newOffsets;
     *tableSize = newSize;
 }
+
+int addValue(VECTOR_TYPE *&values, int *&offsets, int *tableSize, int vectorSize, int position, VECTOR_TYPE defaultValue,
+             VECTOR_TYPE newValue) {
+    if (vectorSize < 0 || *tableSize < 0 || position < 0)
+        return NEGATIVE_NUMBER;
+
+    if (position >= vectorSize)
+        return VECTOR_TOO_SMALL;
+
+    int index = findFreeIndex(offsets, *tableSize);
+    if (index == *tableSize)
+        resizeTables(values, offsets, tableSize);
+
+    offsets[index] = newValue == defaultValue ? OFFSET_EMPTY : position;
+    values[index] = newValue;
+
+    return NO_ERROR;
+}
+
 
 int findFreeIndex(const int *offsets, int tableSize) {
     int index = tableSize;
@@ -73,34 +92,22 @@ int findFreeIndex(const int *offsets, int tableSize) {
 }
 
 
-int addValue(VECTOR_TYPE *&values, int *&offsets, int *tableSize, int vectorSize, int position,
-             VECTOR_TYPE newValue) {
-    if (vectorSize < 0 || *tableSize < 0)
-        return INVALID_SIZE;
-
-    if (position >= vectorSize)
-        return VECTOR_TOO_SMALL;
-
-    int index = findFreeIndex(offsets, *tableSize);
-    if (index == *tableSize)
-        resizeTables(values, offsets, tableSize);
-
-    offsets[index] = position;
-    values[index] = newValue;
-
-    return NO_ERROR;
-}
-
-
 int resize(int *offsets, int tableSize, int *currentVectorSize, int newVectorSize) {
-    if (*currentVectorSize > newVectorSize) {
-        for (int i = 0; i < tableSize; i++)
-            if (offsets[i] >= newVectorSize)
-                offsets[i] = OFFSET_EMPTY;
-    }
+    if (newVectorSize < 0)
+        return NEGATIVE_NUMBER;
+
+    if (newVectorSize < *currentVectorSize)
+        removeOffsetsAboveVectorSize(offsets, tableSize, newVectorSize);
+
 
     *currentVectorSize = newVectorSize;
     return NO_ERROR;
+}
+
+void removeOffsetsAboveVectorSize(int *offsets, int tableSize, int newVectorSize) {
+    for (int i = 0; i < tableSize; i++)
+        if (offsets[i] >= newVectorSize)
+            offsets[i] = OFFSET_EMPTY;
 }
 
 int clean(VECTOR_TYPE *&values, int *&offsets) {
@@ -112,4 +119,18 @@ int clean(VECTOR_TYPE *&values, int *&offsets) {
         delete[] offsets;
         offsets = nullptr;
     }
+}
+
+VECTOR_TYPE readValue(const VECTOR_TYPE* values, const int* offsets, int tableSize, int vectorSize, VECTOR_TYPE defaultValue, int position) {
+    if (position >= vectorSize)
+        return INDEX_OUT_OF_BOUNDS;
+    if (position < 0)
+        return NEGATIVE_NUMBER;
+
+    VECTOR_TYPE value = defaultValue;
+    for (int i = 0; i < tableSize; i++)
+        if (offsets[i] == position)
+            value = values[i];
+
+    return value;
 }
