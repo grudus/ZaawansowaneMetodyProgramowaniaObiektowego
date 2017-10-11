@@ -5,6 +5,10 @@ int findFreeIndex(const int *offsets, int tableSize);
 
 void removeOffsetsAboveVectorSize(int *offsets, int tableSize, int newVectorSize);
 
+void addNotDefaultValue(int *&values, int *&offsets, int *tableSize, int position, int newValue);
+
+void addDefaultValue(int *&offsets, int tableSize, int position);
+
 int init(VECTOR_TYPE *&values, int *&offsets, int *tableSize) {
     *tableSize = DEFAULT_SIZE;
     values = new int[*tableSize];
@@ -64,22 +68,40 @@ void resizeTables(int *&values, int *&offsets, int *tableSize) {
     *tableSize = newSize;
 }
 
-int addValue(VECTOR_TYPE *&values, int *&offsets, int *tableSize, int vectorSize, int position, VECTOR_TYPE defaultValue,
-             VECTOR_TYPE newValue) {
+int
+addValue(VECTOR_TYPE *&values, int *&offsets, int *tableSize, int vectorSize, int position, VECTOR_TYPE defaultValue,
+         VECTOR_TYPE newValue) {
     if (vectorSize < 0 || *tableSize < 0 || position < 0)
         return NEGATIVE_NUMBER;
 
     if (position >= vectorSize)
         return VECTOR_TOO_SMALL;
 
+    if (newValue == defaultValue)
+        addDefaultValue(offsets, *tableSize, position);
+    else
+        addNotDefaultValue(values, offsets, tableSize, position, newValue);
+
+    return NO_ERROR;
+}
+
+void addDefaultValue(int *&offsets, int tableSize, int position) {
+    bool defaultValueAtPosition = true;
+    for (int i = 0; i < tableSize && defaultValueAtPosition; i++)
+        if (offsets[i] == position) {
+            offsets[i] = OFFSET_EMPTY;
+            defaultValueAtPosition = false;
+        }
+
+}
+
+void addNotDefaultValue(int *&values, int *&offsets, int *tableSize, int position, int newValue) {
     int index = findFreeIndex(offsets, *tableSize);
     if (index == *tableSize)
         resizeTables(values, offsets, tableSize);
 
-    offsets[index] = newValue == defaultValue ? OFFSET_EMPTY : position;
+    offsets[index] = position;
     values[index] = newValue;
-
-    return NO_ERROR;
 }
 
 
@@ -121,7 +143,9 @@ int clean(VECTOR_TYPE *&values, int *&offsets) {
     }
 }
 
-VECTOR_TYPE readValue(const VECTOR_TYPE* values, const int* offsets, int tableSize, int vectorSize, VECTOR_TYPE defaultValue, int position) {
+VECTOR_TYPE
+readValue(const VECTOR_TYPE *values, const int *offsets, int tableSize, int vectorSize, VECTOR_TYPE defaultValue,
+          int position) {
     if (position >= vectorSize)
         return INDEX_OUT_OF_BOUNDS;
     if (position < 0)
