@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <iterator>
 
-#define VECTOR_TYPE int
+#define VECTOR_TYPE double
 
 #define NO_ERROR 0
 #define NEGATIVE_NUMBER (-1)

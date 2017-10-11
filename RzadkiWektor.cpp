@@ -5,13 +5,13 @@ int findFreeIndex(const int *offsets, int tableSize);
 
 void removeOffsetsAboveVectorSize(int *offsets, int tableSize, int newVectorSize);
 
-void addNotDefaultValue(int *&values, int *&offsets, int *tableSize, int position, int newValue);
+void addNotDefaultValue(VECTOR_TYPE *&values, int *&offsets, int *tableSize, int position, int newValue);
 
 void addDefaultValue(int *&offsets, int tableSize, int position);
 
 int init(VECTOR_TYPE *&values, int *&offsets, int *tableSize) {
     *tableSize = DEFAULT_SIZE;
-    values = new int[*tableSize];
+    values = new VECTOR_TYPE[*tableSize];
     offsets = new int[*tableSize];
 
     for (int i = 0; i < DEFAULT_SIZE; i++)
@@ -50,7 +50,7 @@ int changeDefaultValues(const int *offsets, int tableSize, int *newValue, int va
 }
 
 
-void resizeTables(int *&values, int *&offsets, int *tableSize) {
+void resizeTables(VECTOR_TYPE *&values, int *&offsets, int *tableSize) {
     int newSize = (int) (*tableSize * RESIZE_SCALE);
     VECTOR_TYPE *newValues = new VECTOR_TYPE[newSize];
     int *newOffsets = new int[newSize];
@@ -95,7 +95,7 @@ void addDefaultValue(int *&offsets, int tableSize, int position) {
 
 }
 
-void addNotDefaultValue(int *&values, int *&offsets, int *tableSize, int position, int newValue) {
+void addNotDefaultValue(VECTOR_TYPE *&values, int *&offsets, int *tableSize, int position, int newValue) {
     int index = findFreeIndex(offsets, *tableSize);
     if (index == *tableSize)
         resizeTables(values, offsets, tableSize);

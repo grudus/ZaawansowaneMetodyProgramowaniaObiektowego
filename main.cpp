@@ -5,13 +5,13 @@
 
 void catchErrors(int status);
 
-bool isVectorValid(const int *offsets, const int *values);
+bool isVectorValid(const int *offsets, const VECTOR_TYPE *values);
 
 int main() {
     std::cout << "Hello, we will start using vectors!" << std::endl;
 
     int *offsets = nullptr;
-    int *values = nullptr;
+    VECTOR_TYPE *values = nullptr;
     int tableSize = -1;
     int vectorSize = -1;
     int defaultValue = 0;
@@ -52,7 +52,7 @@ int main() {
 }
 
 
-bool isVectorValid(const int *offsets, const int *values) {
+bool isVectorValid(const int *offsets, const VECTOR_TYPE *values) {
     bool valid = offsets != nullptr && values != nullptr;
     if (!valid)
         std::cerr << "You should initialize vector first (with mvec)!\n";
