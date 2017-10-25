@@ -1,10 +1,11 @@
 #include <iostream>
 #include "SpareMatrix.h"
-#include <vector>
 
 SpareMatrix* createMatrix(int numberOfDimensions, const int* dimensions, int defaultValue, const std::string &name);
 
 void printMatrixes(std::vector<SpareMatrix*> matrixes);
+
+void deleteMatrix(std::vector<SpareMatrix *> matrixes, int index);
 
 int main() {
     auto *matrixes = new std::vector<SpareMatrix*>();
@@ -14,8 +15,7 @@ int main() {
     matrixes->push_back(matrix);
 
     printMatrixes(*matrixes);
-
-    delete matrix;
+    deleteMatrix(*matrixes, 0);
 
 
     return 0;
@@ -32,4 +32,16 @@ void printMatrixes(std::vector<SpareMatrix *> matrixes) {
         std::cout << matrixes[i]->getName() << "\" size: ";
         matrixes[i]->printSizes();
     }
+}
+
+void deleteMatrix(std::vector<SpareMatrix *> matrixes, int index) {
+    auto matrix = matrixes[index];
+    delete matrix;
+    matrixes.erase(matrixes.begin() + index);
+}
+
+void deleteAll(std::vector<SpareMatrix *> matrixes) {
+    for (auto matrix: matrixes)
+        delete matrix;
+    matrixes.clear();
 }

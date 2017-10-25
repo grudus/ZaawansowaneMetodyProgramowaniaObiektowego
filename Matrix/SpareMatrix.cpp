@@ -55,3 +55,11 @@ void SpareMatrix::printSizes() const {
     }
     std::cout << "]" << std::endl;
 }
+
+int SpareMatrix::getValue(int row, int column) {
+    return cells[row]->getValue(column);
+}
+
+int SpareMatrix::setValue(int row, int column, int value) {
+    cells[row]->setValue(column, value);
+}

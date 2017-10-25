@@ -14,6 +14,69 @@ SparseCell::SparseCell(int vectorSize, int defaultValue) {
 
 void SparseCell::initValueVectors() {
     tableSize = DEFAULT_TABLE_SIZE;
-    offsets = std::vector<int>(static_cast<unsigned long>(tableSize));
-    values = std::vector<int>(static_cast<unsigned long>(tableSize));
+    offsets = new int[tableSize];
+    values = new int[tableSize];
+    for (int i = 0; i < tableSize; i++)
+        offsets[i] = NO_OFFSET;
+}
+
+int SparseCell::getValue(int index) {
+    for (int i = 0; i < tableSize; i++)
+        if (offsets[i] == index)
+            return values[i];
+    return defaultValue;
+}
+
+void SparseCell::setValue(int index, int value) {
+    if (value == defaultValue)
+        addDefaultValue(index);
+    else
+        addNotDefaultValue(index, value);
+}
+
+void SparseCell::addDefaultValue(int index) {
+    bool defaultValueAtPosition = true;
+    for (int i = 0; i < tableSize && defaultValueAtPosition; i++)
+        if (offsets[i] == index) {
+            offsets[i] = this->NO_OFFSET;
+            defaultValueAtPosition = false;
+        }
+}
+
+void SparseCell::addNotDefaultValue(int position, int value) {
+    int index = findFreeIndex();
+    if (index == tableSize)
+        resizeTables();
+
+    offsets[index] = position;
+    values[index] = value;
+}
+
+int SparseCell::findFreeIndex() {
+    int index = tableSize;
+    for (int i = 0; i < tableSize && index == tableSize; i++) {
+        if (offsets[i] == NO_OFFSET) index = i;
+    }
+    return index;
+}
+
+void SparseCell::resizeTables() {
+    int newSize = (int) (tableSize * RESIZE_SCALE);
+    int *newOffsets = new int[newSize];
+    int *newValues = new int[newSize];
+
+    for (int i = 0; i < newSize; i++) {
+        if (i < tableSize) {
+            newValues[i] = values[i];
+            newOffsets[i] = offsets[i];
+        } else
+            newOffsets[i] = NO_OFFSET;
+    }
+
+    delete[] values;
+    delete[] offsets;
+
+    values = newValues;
+    offsets = newOffsets;
+    tableSize = newSize;
 }

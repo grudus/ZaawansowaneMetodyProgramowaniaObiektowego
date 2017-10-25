@@ -22,6 +22,8 @@ public:
     std::string getName() const;
     void printSizes() const;
 
+    int getValue(int row, int column);
+
     ~SpareMatrix();
 
 private:
@@ -33,6 +35,8 @@ private:
     int numberOfDimensions;
 
     void initCells(int size);
+
+    int setValue(int row, int column, int value);
 };
 
 

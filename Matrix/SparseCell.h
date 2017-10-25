@@ -15,13 +15,26 @@ public:
 private:
     static const int DEFAULT_TABLE_SIZE = 10;
     static const int NO_OFFSET = -1;
-    std::vector<int> offsets;
-    std::vector<int> values;
+    static const double RESIZE_SCALE = 1.5;
+    int *offsets;
+    int *values;
     int tableSize = DEFAULT_TABLE_SIZE;
     int vectorSize;
     int defaultValue;
 
     void initValueVectors();
+
+    int getValue(int index);
+
+    void setValue(int index, int value);
+
+    void addDefaultValue(int index);
+
+    void addNotDefaultValue(int index, int value);
+
+    int findFreeIndex();
+
+    void resizeTables();
 };
 
 
