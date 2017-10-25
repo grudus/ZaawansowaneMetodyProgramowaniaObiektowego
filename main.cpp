@@ -5,13 +5,15 @@
 
 void catchErrors(int status);
 
-bool isVectorValid(const int *offsets, const VECTOR_TYPE *values);
+bool isVectorValid(const int *offsets, const int *values);
+
+bool canInitialize(int size);
 
 int main() {
-    std::cout << "Hello, we will start using vectors!" << std::endl;
+    std::cout << "Hello, we will start using vectors!\n\n" << std::endl;
 
     int *offsets = nullptr;
-    VECTOR_TYPE *values = nullptr;
+    int *values = nullptr;
     int tableSize = -1;
     int vectorSize = -1;
     int defaultValue = 0;
@@ -25,10 +27,12 @@ int main() {
 
 
         if (userInstruction == MVEC_INSTRUCTION) {
-            clean(values, offsets);
-            init(values, offsets, &tableSize);
-            catchErrors(resize(offsets, tableSize, &vectorSize, arg1));
-            catchErrors(changeDefaultValues(offsets, tableSize, &defaultValue, arg2));
+            if (canInitialize(arg1)) {
+                clean(values, offsets);
+                init(values, offsets, &tableSize);
+                catchErrors(resize(offsets, tableSize, &vectorSize, arg1));
+                catchErrors(changeDefaultValues(offsets, tableSize, &defaultValue, arg2));
+            }
         } else if (userInstruction == LEN_INSTRUCTION) {
             if (isVectorValid(offsets, values))
                 catchErrors(resize(offsets, tableSize, &vectorSize, arg1));
@@ -51,8 +55,14 @@ int main() {
     return 0;
 }
 
+bool canInitialize(int size) {
+    if (size < 0)
+        std::cerr << "Cannot pass negative numbers as mvec len!" << std::endl;
+    return size >= 0;
+}
 
-bool isVectorValid(const int *offsets, const VECTOR_TYPE *values) {
+
+bool isVectorValid(const int *offsets, const int *values) {
     bool valid = offsets != nullptr && values != nullptr;
     if (!valid)
         std::cerr << "You should initialize vector first (with mvec)!\n";

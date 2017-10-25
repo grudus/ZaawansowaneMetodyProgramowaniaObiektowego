@@ -5,13 +5,13 @@ int findFreeIndex(const int *offsets, int tableSize);
 
 void removeOffsetsAboveVectorSize(int *offsets, int tableSize, int newVectorSize);
 
-void addNotDefaultValue(VECTOR_TYPE *&values, int *&offsets, int *tableSize, int position, int newValue);
+void addNotDefaultValue(int *&values, int *&offsets, int *tableSize, int position, int newValue);
 
 void addDefaultValue(int *&offsets, int tableSize, int position);
 
-int init(VECTOR_TYPE *&values, int *&offsets, int *tableSize) {
+int init(int *& values, int *&offsets, int *tableSize) {
     *tableSize = DEFAULT_SIZE;
-    values = new VECTOR_TYPE[*tableSize];
+    values = new int[*tableSize];
     offsets = new int[*tableSize];
 
     for (int i = 0; i < DEFAULT_SIZE; i++)
@@ -21,17 +21,17 @@ int init(VECTOR_TYPE *&values, int *&offsets, int *tableSize) {
 }
 
 std::string
-getValues(const VECTOR_TYPE *values, const int *offsets, VECTOR_TYPE defaultValue, int vectorSize, int tableSize) {
+getValues(const int *values, const int *offsets, int defaultValue, int vectorSize, int tableSize) {
     if (vectorSize < 0 || tableSize < 0)
         return _INVALID_SIZE;
 
     std::string string = LENGTH_TEXT + std::to_string(vectorSize) + VALUES_TEXT;
 
-    VECTOR_TYPE *valuesArray = new VECTOR_TYPE[vectorSize];
+    int *valuesArray = new int[vectorSize];
     std::fill_n(valuesArray, vectorSize, defaultValue);
     for (int i = 0; i < tableSize; i++)
         if (offsets[i] != OFFSET_EMPTY)
-            valuesArray[offsets[i]] = values[i];
+            valuesArray[vectorSize - 1 - offsets[i]] = values[i];
 
     for (int i = 0; i < vectorSize; i++)
         string += std::to_string(valuesArray[i]) + (i == vectorSize - 1 ? " " : ", ");
@@ -50,9 +50,9 @@ int changeDefaultValues(const int *offsets, int tableSize, int *newValue, int va
 }
 
 
-void resizeTables(VECTOR_TYPE *&values, int *&offsets, int *tableSize) {
+void resizeTables(int *&values, int *&offsets, int *tableSize) {
     int newSize = (int) (*tableSize * RESIZE_SCALE);
-    VECTOR_TYPE *newValues = new VECTOR_TYPE[newSize];
+    int *newValues = new int[newSize];
     int *newOffsets = new int[newSize];
 
     for (int i = 0; i < newSize; i++) {
@@ -69,8 +69,8 @@ void resizeTables(VECTOR_TYPE *&values, int *&offsets, int *tableSize) {
 }
 
 int
-addValue(VECTOR_TYPE *&values, int *&offsets, int *tableSize, int vectorSize, int position, VECTOR_TYPE defaultValue,
-         VECTOR_TYPE newValue) {
+addValue(int *&values, int *&offsets, int *tableSize, int vectorSize, int position, int defaultValue,
+         int newValue) {
     if (vectorSize < 0 || *tableSize < 0 || position < 0)
         return NEGATIVE_NUMBER;
 
@@ -95,7 +95,7 @@ void addDefaultValue(int *&offsets, int tableSize, int position) {
 
 }
 
-void addNotDefaultValue(VECTOR_TYPE *&values, int *&offsets, int *tableSize, int position, int newValue) {
+void addNotDefaultValue(int *&values, int *&offsets, int *tableSize, int position, int newValue) {
     int index = findFreeIndex(offsets, *tableSize);
     if (index == *tableSize)
         resizeTables(values, offsets, tableSize);
@@ -132,7 +132,7 @@ void removeOffsetsAboveVectorSize(int *offsets, int tableSize, int newVectorSize
             offsets[i] = OFFSET_EMPTY;
 }
 
-int clean(VECTOR_TYPE *&values, int *&offsets) {
+int clean(int *&values, int *&offsets) {
     if (values != nullptr) {
         delete[] values;
         values = nullptr;
@@ -143,15 +143,15 @@ int clean(VECTOR_TYPE *&values, int *&offsets) {
     }
 }
 
-VECTOR_TYPE
-readValue(const VECTOR_TYPE *values, const int *offsets, int tableSize, int vectorSize, VECTOR_TYPE defaultValue,
+int
+readValue(const int *values, const int *offsets, int tableSize, int vectorSize, int defaultValue,
           int position) {
     if (position >= vectorSize)
         return INDEX_OUT_OF_BOUNDS;
     if (position < 0)
         return NEGATIVE_NUMBER;
 
-    VECTOR_TYPE value = defaultValue;
+    int value = defaultValue;
     for (int i = 0; i < tableSize; i++)
         if (offsets[i] == position)
             value = values[i];
