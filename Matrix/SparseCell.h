@@ -9,7 +9,7 @@ class SparseCell {
 
 public:
     explicit SparseCell();
-    explicit SparseCell(int vectorSize);
+    explicit SparseCell(int vectorSize, int defaultValue);
 
 
 private:
@@ -19,6 +19,7 @@ private:
     std::vector<int> values;
     int tableSize = DEFAULT_TABLE_SIZE;
     int vectorSize;
+    int defaultValue;
 
     void initValueVectors();
 };

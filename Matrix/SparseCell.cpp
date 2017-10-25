@@ -5,11 +5,12 @@ SparseCell::SparseCell() {
     initValueVectors();
 }
 
-SparseCell::SparseCell(int vectorSize) {
+
+SparseCell::SparseCell(int vectorSize, int defaultValue) {
     this->vectorSize = vectorSize;
+    this->defaultValue = defaultValue;
     initValueVectors();
 }
-
 
 void SparseCell::initValueVectors() {
     tableSize = DEFAULT_TABLE_SIZE;
