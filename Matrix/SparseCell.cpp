@@ -1,5 +1,11 @@
 #include "SparseCell.h"
 
+
+const int SparseCell::DEFAULT_TABLE_SIZE = 10;
+const int SparseCell::NO_OFFSET = -1;
+const double SparseCell::RESIZE_SCALE = 1.5;
+
+
 SparseCell::SparseCell() {
     vectorSize = DEFAULT_TABLE_SIZE;
     initValueVectors();

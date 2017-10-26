@@ -13,9 +13,9 @@ public:
 
 
 private:
-    static const int DEFAULT_TABLE_SIZE = 10;
-    static const int NO_OFFSET = -1;
-    static const double RESIZE_SCALE = 1.5;
+    static const int DEFAULT_TABLE_SIZE;
+    static const int NO_OFFSET;
+    static const double RESIZE_SCALE;
     int *offsets;
     int *values;
     int tableSize = DEFAULT_TABLE_SIZE;
