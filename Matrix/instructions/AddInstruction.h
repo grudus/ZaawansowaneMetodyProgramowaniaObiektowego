@@ -14,6 +14,9 @@ public:
 
     int handle() override;
 
+private:
+    inline void ltrim(std::string &s);
+
 };
 
 

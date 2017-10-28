@@ -16,9 +16,16 @@ int AddInstruction::handle() {
     std::string name;
     int defaultValue = getIntegerInput();
 
-    std::cin >> name;
+    getline(std::cin, name);
+    ltrim(name);
 
     matrixes->push_back(new SpareMatrix(name, size, sizes, defaultValue));
 
     return 0;
+}
+
+inline void AddInstruction::ltrim(std::string &s) {
+    s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](int ch) {
+        return !std::isspace(ch);
+    }));
 }

@@ -23,7 +23,10 @@ SpareMatrix::SpareMatrix(const SpareMatrix &copy) {
 }
 
 SpareMatrix::SpareMatrix(const std::string &name, int numberOfDimensions, int *dimensions, int defaultValue) {
-    this->name = name;
+    if (name.empty())
+        this->name = DEFAULT_NAME;
+    else
+        this->name = name;
     this->numberOfDimensions = numberOfDimensions;
     this->dimensionSizes = dimensions;
     this->defaultValue = defaultValue;
@@ -35,6 +38,7 @@ SpareMatrix::~SpareMatrix() {
     for (int i = 0; i < cellsTableSize; i++)
         delete cells[i];
     delete[] cells;
+    delete[] dimensionSizes;
     std::cout << "Destroy [" << name << "]" << std::endl;
 }
 
