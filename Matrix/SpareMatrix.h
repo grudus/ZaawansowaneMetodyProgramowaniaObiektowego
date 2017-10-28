@@ -60,6 +60,10 @@ private:
     std::string coordinatesToString(int coordinates[]) const;
 
     void changeBackwardValuesIfNeeded(int coordinates[], int index) const;
+
+    void copyCells(const SpareMatrix &copy);
+
+    void copyDimensionSizes(const SpareMatrix &copy);
 };
 
 

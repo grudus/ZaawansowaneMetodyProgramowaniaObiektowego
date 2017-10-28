@@ -18,8 +18,26 @@ SpareMatrix::SpareMatrix(const std::string &name) {
 
 SpareMatrix::SpareMatrix(const SpareMatrix &copy) {
     this->name = copy.getName() + "_copy";
-    initCells();
+    this->numberOfDimensions = copy.numberOfDimensions;
+    this->defaultValue = copy.defaultValue;
+    copyCells(copy);
+    copyDimensionSizes(copy);
     printCreation();
+}
+
+void SpareMatrix::copyDimensionSizes(const SpareMatrix &copy) {
+    dimensionSizes = new int[copy.numberOfDimensions];
+    for (int i = 0; i < numberOfDimensions; i++)
+        dimensionSizes[i] = copy.dimensionSizes[i];
+}
+
+void SpareMatrix::copyCells(const SpareMatrix &copy) {
+    cellsTableSize = copy.cellsTableSize;
+    cells = new SparseCell *[copy.cellsTableSize];
+    for (int i = 0; i < cellsTableSize; i++) {
+        auto copyCell = copy.cells[i];
+        cells[i] = copyCell == nullptr ? nullptr : new SparseCell(copyCell);
+    }
 }
 
 SpareMatrix::SpareMatrix(const std::string &name, int numberOfDimensions, int *dimensions, int defaultValue) {

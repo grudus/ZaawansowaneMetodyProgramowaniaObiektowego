@@ -5,6 +5,8 @@
 #include "SpareMatrix.h"
 
 class SparseCell {
+    SparseCell(SparseCell *copy);
+
     friend class SpareMatrix;
 
 public:
@@ -16,6 +18,8 @@ private:
     int *coordinates;
     int dimensions;
     int value;
+
+    void copyCoordinates(SparseCell *copy);
 };
 
 
