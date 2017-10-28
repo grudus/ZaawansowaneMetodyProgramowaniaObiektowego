@@ -16,27 +16,50 @@ public:
 
     SpareMatrix(const SpareMatrix &copy);
 
-    SpareMatrix(const std::string &name, int numberOfDimensions, const int *dimensions, int defaultValue);
+    SpareMatrix(const std::string &name, int numberOfDimensions, int *dimensions, int defaultValue);
 
 
     std::string getName() const;
-    void printSizes() const;
 
-    int getValue(int row, int column);
+    std::string getDimensionsString() const;
+
+    void setValue(int *coordinates, int value);
+
+    int getValue(int *coordinates)const;
+
+    int getNumberOfDimensions() const;
+
+    std::string toString() const;
 
     ~SpareMatrix();
-
 private:
+    static const std::string DEFAULT_NAME;
+    static const double CELLS_TABLE_SCALE;
+    static const int DEFAULT_CELLS_TABLE_SIZE;
+
+    std::string name;
+    int defaultValue;
+
+    int numberOfDimensions;
+    int *dimensionSizes;
+    int cellsTableSize;
+    SparseCell **cells;
+
+    void initCells();
+
     void printCreation();
 
-    static const std::string DEFAULT_NAME;
-    std::string name;
-    SparseCell **cells;
-    int numberOfDimensions;
+    int findIndexOfCellWithCoordinates(int *coordinates) const;
 
-    void initCells(int size);
+    int getIndexIfValueExists(int *coordinates) const;
 
-    int setValue(int row, int column, int value);
+    void resizeTable();
+
+    std::string getValuesString() const;
+
+    std::string coordinatesToString(int coordinates[]) const;
+
+    void changeBackwardValuesIfNeeded(int coordinates[], int index) const;
 };
 
 

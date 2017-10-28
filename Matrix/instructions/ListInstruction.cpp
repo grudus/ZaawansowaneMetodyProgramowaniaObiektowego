@@ -11,7 +11,7 @@ int ListInstruction::handle() {
     for (int i = 0; i < matrixes->size(); i++) {
         std::cout << "[" << i << "] \"";
         std::cout << (*matrixes)[i]->getName() << "\" size: ";
-        (*matrixes)[i]->printSizes();
+        std::cout << (*matrixes)[i]->getDimensionsString() << std::endl;
     }
 
     return 0;

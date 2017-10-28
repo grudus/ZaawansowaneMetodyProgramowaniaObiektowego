@@ -10,7 +10,7 @@
 
 class DefInstruction : public Instruction {
 public:
-    DefInstruction(std::vector<SpareMatrix *> *matrixes);
+    explicit DefInstruction(std::vector<SpareMatrix *> *matrixes);
 
     int handle() override;
 };
