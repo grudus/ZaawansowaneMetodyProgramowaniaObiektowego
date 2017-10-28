@@ -9,6 +9,7 @@
 #include "instructions/DefInstruction.h"
 #include "instructions/PrintInstruction.h"
 #include "instructions/CopyInstruction.h"
+#include "instructions/RenameInstruction.h"
 
 void UserInterface::showMenu() {
     std::cout << "\n** addmat <dimNum> <dim0size> <dim1size>... <dimNum-1size> <def> <!name!> -\n"
@@ -57,4 +58,6 @@ void UserInterface::readInstruction(std::vector<SpareMatrix *> *matrixes) {
         PrintInstruction(matrixes).handle();
     else if (instruction == "copy")
         CopyInstruction(matrixes).handle();
+    else if (instruction == "rename")
+        RenameInstruction(matrixes).handle();
 }

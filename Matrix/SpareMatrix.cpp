@@ -198,3 +198,7 @@ void SpareMatrix::changeBackwardValuesIfNeeded(int *coordinates, int index) cons
         changeBackwardValuesIfNeeded(coordinates, index - 1);
     }
 }
+
+void SpareMatrix::rename(std::string name) {
+    this->name = name;
+}

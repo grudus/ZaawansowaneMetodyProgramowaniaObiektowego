@@ -20,6 +20,7 @@ public:
 
 
     std::string getName() const;
+    void rename(std::string name);
 
     std::string getDimensionsString() const;
 
