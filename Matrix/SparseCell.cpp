@@ -8,5 +8,6 @@ SparseCell::SparseCell(int dimensions, int *coordinates, int value) {
 }
 
 SparseCell::~SparseCell() {
+    std::cout << "DELETE SPARSE CCELL" << std::endl;
     delete[] coordinates;
 }

@@ -10,7 +10,7 @@ int DefInstruction::handle() {
     int matrixIndex = getIntegerInput();
     SpareMatrix *matrix = (*matrixes)[matrixIndex];
     int dimensions = matrix->getNumberOfDimensions();
-    int coordinates[dimensions];
+    int *coordinates = new int[dimensions];
 
     for (int i = 0; i < dimensions; i++)
         coordinates[i] = getIntegerInput();

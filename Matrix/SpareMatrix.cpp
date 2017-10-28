@@ -32,6 +32,8 @@ SpareMatrix::SpareMatrix(const std::string &name, int numberOfDimensions, int *d
 }
 
 SpareMatrix::~SpareMatrix() {
+    for (int i = 0; i < cellsTableSize; i++)
+        delete cells[i];
     delete[] cells;
     std::cout << "Destroy [" << name << "]" << std::endl;
 }
