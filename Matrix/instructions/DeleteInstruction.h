@@ -1,7 +1,3 @@
-//
-// Created by grudus on 10/25/17.
-//
-
 #ifndef MATRIX_DELETEINSTRUCTION_H
 #define MATRIX_DELETEINSTRUCTION_H
 

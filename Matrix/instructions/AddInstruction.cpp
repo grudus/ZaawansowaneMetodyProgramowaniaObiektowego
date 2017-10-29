@@ -1,7 +1,3 @@
-//
-// Created by grudus on 10/25/17.
-//
-
 #include "AddInstruction.h"
 
 AddInstruction::AddInstruction(std::vector<SpareMatrix *> *matrixes) : Instruction(matrixes) {}

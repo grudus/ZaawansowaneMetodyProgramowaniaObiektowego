@@ -1,7 +1,3 @@
-//
-// Created by grudus on 10/26/17.
-//
-
 #ifndef MATRIX_DEFINSTRUCTION_H
 #define MATRIX_DEFINSTRUCTION_H
 

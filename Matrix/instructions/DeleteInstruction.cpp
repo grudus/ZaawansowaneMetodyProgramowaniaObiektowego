@@ -1,7 +1,3 @@
-//
-// Created by grudus on 10/25/17.
-//
-
 #include "DeleteInstruction.h"
 
 DeleteInstruction::DeleteInstruction(std::vector<SpareMatrix *> *matrixes) : Instruction(matrixes) {}

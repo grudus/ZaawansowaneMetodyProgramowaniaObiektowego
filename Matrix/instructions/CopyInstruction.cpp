@@ -1,7 +1,3 @@
-//
-// Created by grudus on 10/28/17.
-//
-
 #include "CopyInstruction.h"
 
 CopyInstruction::CopyInstruction(std::vector<SpareMatrix *> *matrixes) : Instruction(matrixes) {}

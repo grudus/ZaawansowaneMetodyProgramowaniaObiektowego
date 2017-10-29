@@ -1,7 +1,3 @@
-//
-// Created by grudus on 10/25/17.
-//
-
 #include "ListInstruction.h"
 
 ListInstruction::ListInstruction(std::vector<SpareMatrix *> *matrixes) : Instruction(matrixes) {}

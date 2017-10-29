@@ -1,7 +1,3 @@
-//
-// Created by grudus on 10/25/17.
-//
-
 #ifndef MATRIX_DELETEALLINSTRUCTION_H
 #define MATRIX_DELETEALLINSTRUCTION_H
 
