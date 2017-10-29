@@ -8,6 +8,12 @@ CopyInstruction::CopyInstruction(std::vector<SpareMatrix *> *matrixes) : Instruc
 
 int CopyInstruction::handle() {
     int index = getIntegerInput();
+
+    if (!indexIsValid(index)) {
+        handleInvalidIndex(index);
+        return -1;
+    }
+
     SpareMatrix *matrix = (*matrixes)[index];
 
     SpareMatrix *copy = new SpareMatrix(*matrix);

@@ -32,6 +32,8 @@ public:
 
     std::string toString() const;
 
+    int* getDimensionsSizes() const;
+
     ~SpareMatrix();
 private:
     static const std::string DEFAULT_NAME;

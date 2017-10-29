@@ -8,6 +8,12 @@ RenameInstruction::RenameInstruction(std::vector<SpareMatrix *> *matrixes) : Ins
 
 int RenameInstruction::handle() {
     int index = getIntegerInput();
+
+    if (!indexIsValid(index)) {
+        handleInvalidIndex(index);
+        return -1;
+    }
+
     std::string name;
     std::cin >> name;
 

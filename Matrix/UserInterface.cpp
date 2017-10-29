@@ -56,7 +56,7 @@ void UserInterface::readInstruction(std::vector<SpareMatrix *> *matrixes) {
         DefInstruction(matrixes).handle();
     else if (instruction == "print")
         PrintInstruction(matrixes).handle();
-    else if (instruction == "copy")
+    else if (instruction == "clone")
         CopyInstruction(matrixes).handle();
     else if (instruction == "rename")
         RenameInstruction(matrixes).handle();

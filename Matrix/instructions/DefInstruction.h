@@ -13,6 +13,8 @@ public:
     explicit DefInstruction(std::vector<SpareMatrix *> *matrixes);
 
     int handle() override;
+
+    bool invalidCoordinates(const int *coordinates, SpareMatrix *matrix);
 };
 
 

@@ -22,6 +22,14 @@ public:
 
 protected:
 
+    bool indexIsValid(int index) {
+        return index >= 0 && index < (*matrixes).size();
+    }
+    void handleInvalidIndex(int index) {
+        std::cerr << "Invalid index [" << index << "]" << std::endl;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+
     int getIntegerInput() {
         std::string input;
         bool isNumeric;

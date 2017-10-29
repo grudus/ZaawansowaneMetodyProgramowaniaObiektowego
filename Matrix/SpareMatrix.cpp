@@ -202,3 +202,7 @@ void SpareMatrix::changeBackwardValuesIfNeeded(int *coordinates, int index) cons
 void SpareMatrix::rename(std::string name) {
     this->name = name;
 }
+
+int *SpareMatrix::getDimensionsSizes() const {
+    return dimensionSizes;
+}
