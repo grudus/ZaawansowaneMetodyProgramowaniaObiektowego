@@ -93,14 +93,14 @@ void SpareMatrix::setValue(int *coordinates, int value) {
     cells[index] = new SparseCell(numberOfDimensions, coordinates, value);
 }
 
-int SpareMatrix::getValue(int *coordinates)const {
+int SpareMatrix::getValue(const int *coordinates) const {
     int index = findIndexOfCellWithCoordinates(coordinates);
     if (index == cellsTableSize || cells[index] == nullptr)
         return defaultValue;
     return cells[index]->value;
 }
 
-int SpareMatrix::findIndexOfCellWithCoordinates(int *coordinates) const {
+int SpareMatrix::findIndexOfCellWithCoordinates(const int *coordinates) const {
     int indexOfOldValue = getIndexIfValueExists(coordinates);
 
     if (indexOfOldValue >= 0) {
@@ -115,7 +115,7 @@ int SpareMatrix::findIndexOfCellWithCoordinates(int *coordinates) const {
     return freeIndex;
 }
 
-int SpareMatrix::getIndexIfValueExists(int *coordinates) const {
+int SpareMatrix::getIndexIfValueExists(const int *coordinates) const {
     int index = -1;
     for (int i = 0; i < cellsTableSize && index == -1; i++) {
         SparseCell *cell = cells[i];
@@ -180,6 +180,22 @@ std::string SpareMatrix::getValuesString() const {
     return string;
 }
 
+void SpareMatrix::reverse(int value) {
+    int currentIndexes[numberOfDimensions];
+    for (int i = 0; i < numberOfDimensions; i++) currentIndexes[i] = 0;
+    int index = numberOfDimensions - 1;
+
+    while (currentIndexes[0] < dimensionSizes[0]) {
+        if (isDefaultValue(currentIndexes))
+            setValue(currentIndexes, value);
+        else
+            setValue(currentIndexes, defaultValue);
+
+        currentIndexes[index]++;
+        changeBackwardValuesIfNeeded(currentIndexes, index);
+    }
+}
+
 std::string SpareMatrix::coordinatesToString(int *coordinates) const {
     std::string string = "[";
     for (int i = 0; i < numberOfDimensions; i++) {
@@ -205,4 +221,8 @@ void SpareMatrix::rename(std::string name) {
 
 int *SpareMatrix::getDimensionsSizes() const {
     return dimensionSizes;
+}
+
+bool SpareMatrix::isDefaultValue(const int *coordinates) const {
+    return getValue(coordinates) == SpareMatrix::defaultValue;
 }

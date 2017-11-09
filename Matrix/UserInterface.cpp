@@ -1,6 +1,3 @@
-//
-// Created by grudus on 10/14/17.
-//
 #include "UserInterface.h"
 #include "instructions/AddInstruction.h"
 #include "instructions/ListInstruction.h"
@@ -10,6 +7,8 @@
 #include "instructions/PrintInstruction.h"
 #include "instructions/CopyInstruction.h"
 #include "instructions/RenameInstruction.h"
+#include "instructions/ReverseInstruction.h"
+#include "instructions/MultipleInstruction.h"
 
 void UserInterface::showMenu() {
     std::cout << "\n** addmat <dimNum> <dim0size> <dim1size>... <dimNum-1size> <def> <!name!> -\n"
@@ -35,7 +34,12 @@ void UserInterface::showMenu() {
             "offsecie <matoff>\n"
             "** clone <matoff> - skolonowanie matrycy o offsecie <matoff> i dodanie jej do puli matryc na\n"
             "ostatniej pozycji\n"
-            "** rename <matoff> <newName> - zmiany nazwy matrycy rzadkiej o offsecie <matoff>\n" << std::endl;
+            "** rename <matoff> <newName> - zmiany nazwy matrycy rzadkiej o offsecie <matoff>\n"
+            "** reverse <matoff> <newValue> - wszystkie defaultowe wartosci zostaja zamienione na <newValue>, wszystkie okreslone\n"
+            "wracaja do pozycji defaultowej"
+            "** mult <matoff1> <matoff2> - pomnozenie macierzy <matoff1> przez macierz <matoff2> (tylko jesli sa 2 wymiarowe)\n"
+            "wynik zostaje zapisany w nowe macierzy"
+              << std::endl;
 
 }
 
@@ -60,4 +64,12 @@ void UserInterface::readInstruction(std::vector<SpareMatrix *> *matrixes) {
         CopyInstruction(matrixes).handle();
     else if (instruction == "rename")
         RenameInstruction(matrixes).handle();
+    else if (instruction == "reverse")
+        ReverseInstruction(matrixes).handle();
+    else if (instruction == "mult")
+        MultipleInstruction(matrixes).handle();
+    else {
+        std::cerr << "Bledna instrukcja: " << instruction << std::endl;
+        std::cin.ignore(::std::numeric_limits<long>::max(), '\n');
+    }
 }

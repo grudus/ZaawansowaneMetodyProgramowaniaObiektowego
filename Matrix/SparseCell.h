@@ -20,6 +20,8 @@ private:
     int value;
 
     void copyCoordinates(SparseCell *copy);
+
+    void copyCoordinates(const int *coordinatesToCopy);
 };
 
 

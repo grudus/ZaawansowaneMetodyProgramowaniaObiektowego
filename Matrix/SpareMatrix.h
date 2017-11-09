@@ -26,13 +26,15 @@ public:
 
     void setValue(int *coordinates, int value);
 
-    int getValue(int *coordinates)const;
+    int getValue(const int *coordinates) const;
 
     int getNumberOfDimensions() const;
 
     std::string toString() const;
 
     int* getDimensionsSizes() const;
+
+    void reverse(int value);
 
     ~SpareMatrix();
 private:
@@ -52,9 +54,9 @@ private:
 
     void printCreation();
 
-    int findIndexOfCellWithCoordinates(int *coordinates) const;
+    int findIndexOfCellWithCoordinates(const int *coordinates) const;
 
-    int getIndexIfValueExists(int *coordinates) const;
+    int getIndexIfValueExists(const int *coordinates) const;
 
     void resizeTable();
 
@@ -67,6 +69,8 @@ private:
     void copyCells(const SpareMatrix &copy);
 
     void copyDimensionSizes(const SpareMatrix &copy);
+
+    bool isDefaultValue(const int *coordinates) const;
 };
 
 

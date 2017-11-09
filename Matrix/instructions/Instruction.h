@@ -19,8 +19,11 @@ protected:
 
     std::vector<SpareMatrix *> *matrixes;
 
+    void handleInvalidInput(const std::string &message) const;
+
 private:
     bool isNumber(const std::string &x) const;
+
 };
 
 

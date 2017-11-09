@@ -9,8 +9,13 @@ bool Instruction::indexIsValid(int index) const {
 }
 
 void Instruction::handleInvalidIndex(int index) const {
-    std::cerr << "Invalid index [" << index << "]" << std::endl;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::string message = "Invalid index [" + std::to_string(index) + "]";
+    handleInvalidInput(message);
+}
+
+void Instruction::handleInvalidInput(const std::string &message) const {
+    std::cerr << message << std::endl;
+    std::cin.ignore(::std::numeric_limits<long>::max(), '\n');
 }
 
 int Instruction::getIntegerInput() const {

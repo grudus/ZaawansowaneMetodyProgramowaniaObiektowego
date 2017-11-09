@@ -3,8 +3,8 @@
 
 SparseCell::SparseCell(int dimensions, int *coordinates, int value) {
     this->dimensions = dimensions;
-    this->coordinates = coordinates;
     this->value = value;
+    copyCoordinates(coordinates);
 }
 
 SparseCell::~SparseCell() {
@@ -19,7 +19,11 @@ SparseCell::SparseCell(SparseCell *copy) {
 }
 
 void SparseCell::copyCoordinates(SparseCell *copy) {
-    coordinates = new int[dimensions];
+    copyCoordinates(copy->coordinates);
+}
+
+void SparseCell::copyCoordinates(const int *coordinatesToCopy) {
+    this->coordinates = new int[dimensions];
     for (int i = 0; i < dimensions; i++)
-        coordinates[i] = copy->coordinates[i];
+        this->coordinates[i] = coordinatesToCopy[i];
 }
