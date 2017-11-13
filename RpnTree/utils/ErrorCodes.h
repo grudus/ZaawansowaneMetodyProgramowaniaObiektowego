@@ -1,0 +1,6 @@
+#ifndef RPNTREE_ERRORCODES_H
+#define RPNTREE_ERRORCODES_H
+
+#define OK 1
+
+#endif //RPNTREE_ERRORCODES_H

@@ -1,6 +1,8 @@
 #ifndef RPNTREE_EITHER_H
 #define RPNTREE_EITHER_H
 
+#include "ErrorCodes.h"
+
 template<typename T>
 class ErrorableValue {
 
@@ -10,13 +12,17 @@ public:
         this->errorCode = false;
     }
 
-    explicit ErrorableValue(int errorCode, bool flag) {
+    explicit ErrorableValue(int errorCode, bool markAsError) {
         this->errorCode = errorCode;
-        this->error = flag;
+        this->error = markAsError;
     }
 
     static ErrorableValue *fromError(int code) {
         return new ErrorableValue(code, true);
+    }
+
+    static ErrorableValue *okCode() {
+        return new ErrorableValue(OK, false);
     }
 
     static ErrorableValue *fromValue(T value) {

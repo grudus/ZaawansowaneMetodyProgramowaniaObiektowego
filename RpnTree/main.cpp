@@ -1,7 +1,6 @@
 #include <iostream>
 #include "utils/ErrorableValue.h"
 
-
 int main() {
     auto maybeError = ErrorableValue<std::string>::fromValue("heheszki");
 
