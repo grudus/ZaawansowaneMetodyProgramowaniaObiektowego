@@ -40,9 +40,8 @@ int main() {
     auto expr = split("+ * 5 sin x * + a b 8", ' ');
     auto tree = RpnBinaryTreeFactory().create(expr);
 
-    std::cout << "prefixed: " << std::endl;
-    std::cout << tree->prefixToString() << std::endl;
 
-    
+    std::cout << "end" << std::endl;
+
     return 0;
 }

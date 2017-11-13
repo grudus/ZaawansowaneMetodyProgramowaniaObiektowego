@@ -4,7 +4,10 @@
 
 
 #include <vector>
+#include <algorithm>
 #include "Tree.h"
+#include "../rpn/RpnElemFactory.h"
+
 
 class RpnBinaryTreeFactory {
 
