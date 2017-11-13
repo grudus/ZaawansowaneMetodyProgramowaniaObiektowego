@@ -13,3 +13,7 @@ std::string RpnOperator::getOperator() {
 RpnOperator::RpnOperator(std::string _operator): oper(std::move(_operator)) {
 
 }
+
+std::string RpnOperator::toString() const {
+    return oper;
+}

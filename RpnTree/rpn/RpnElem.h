@@ -1,12 +1,14 @@
 #ifndef RPNTREE_RPNELEM_H
 #define RPNTREE_RPNELEM_H
 
+#include <string>
 
 class RpnElem {
 public:
     virtual ~RpnElem() = default;;
 
     virtual bool isOperator() = 0;
+    virtual std::string toString() const = 0;
 };
 
 

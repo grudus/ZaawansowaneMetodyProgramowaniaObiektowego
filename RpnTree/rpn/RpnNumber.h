@@ -10,6 +10,8 @@ public:
     bool isOperator() override;
     int getNumber() const;
 
+    std::string toString() const override;
+
 private:
     const int number;
 

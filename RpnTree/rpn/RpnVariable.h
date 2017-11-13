@@ -5,10 +5,12 @@
 #include <utility>
 #include "RpnElem.h"
 
-class RpnVariable: RpnElem {
+class RpnVariable : public RpnElem {
 public:
     explicit RpnVariable(std::string variable): var(std::move(variable)) {}
 
+    bool isOperator() override;
+    std::string toString() const override;
 
 private:
     const std::string var;

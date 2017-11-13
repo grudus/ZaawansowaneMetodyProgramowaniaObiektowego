@@ -4,13 +4,39 @@
 #include "../rpn/RpnElem.h"
 
 class Node {
-    friend class Tree;
+//    friend class Tree;
 public:
-    explicit Node(const RpnElem &elem): elem(elem), left(nullptr), right(nullptr) {}
+    explicit Node(RpnElem *elem) : elem(elem), left(nullptr), right(nullptr) {}
+
+    const RpnElem *getElem() const {
+        return elem;
+    }
+
+    void setElem(RpnElem *elem) {
+        Node::elem = elem;
+    }
+
+    Node *getLeft() const {
+        return left;
+    }
+
+    void setLeft(Node *left) {
+        Node::left = left;
+    }
+
+    Node *getRight() const {
+        return right;
+    }
+
+    void setRight(Node *right) {
+        Node::right = right;
+    }
+
+
 private:
-    RpnElem elem;
-    Node* left;
-    Node* right;
+    RpnElem *elem;
+    Node *left;
+    Node *right;
 };
 
 

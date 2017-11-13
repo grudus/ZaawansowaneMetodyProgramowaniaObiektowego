@@ -9,3 +9,7 @@ int RpnNumber::getNumber() const {
 }
 
 RpnNumber::RpnNumber(int number) : number(number) {}
+
+std::string RpnNumber::toString() const {
+    return std::to_string(number);
+}
