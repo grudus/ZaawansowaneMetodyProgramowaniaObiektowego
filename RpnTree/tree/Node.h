@@ -4,7 +4,7 @@
 #include "../rpn/RpnElem.h"
 
 class Node {
-//    friend class Tree;
+    friend class Tree;
 public:
     explicit Node(RpnElem *elem) : elem(elem), left(nullptr), right(nullptr) {}
 
