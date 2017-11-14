@@ -18,7 +18,7 @@ public:
         Node::elem = elem;
     }
 
-    void addChildren(Node *child) {
+    void addChild(Node *child) {
         children.push_back(child);
     }
 
