@@ -2,11 +2,13 @@
 #define RPNTREE_NODE_H
 
 #include "../rpn/RpnElem.h"
+#include <vector>
 
 class Node {
     friend class Tree;
+
 public:
-    explicit Node(RpnElem *elem) : elem(elem), left(nullptr), right(nullptr) {}
+    explicit Node(RpnElem *elem) : elem(elem) {}
 
     const RpnElem *getElem() const {
         return elem;
@@ -16,27 +18,25 @@ public:
         Node::elem = elem;
     }
 
-    Node *getLeft() const {
-        return left;
+    void addChildren(Node *child) {
+        children.push_back(child);
     }
 
-    void setLeft(Node *left) {
-        Node::left = left;
+    std::vector<Node *> getChildren() {
+        return children;
     }
 
-    Node *getRight() const {
-        return right;
-    }
 
-    void setRight(Node *right) {
-        Node::right = right;
+    ~Node() {
+        delete elem;
+        for (auto node : children)
+            delete node;
+        children.clear();
     }
-
 
 private:
     RpnElem *elem;
-    Node *left;
-    Node *right;
+    std::vector<Node *> children;
 };
 
 

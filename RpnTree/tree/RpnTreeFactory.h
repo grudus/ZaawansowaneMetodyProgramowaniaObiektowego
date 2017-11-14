@@ -1,6 +1,6 @@
 
-#ifndef RPNTREE_RPNBINARYTREEFACTORY_H
-#define RPNTREE_RPNBINARYTREEFACTORY_H
+#ifndef RPNTREE_RPNTREEFACTORY_H
+#define RPNTREE_RPNTREEFACTORY_H
 
 
 #include <vector>
@@ -9,11 +9,11 @@
 #include "../rpn/RpnElemFactory.h"
 
 
-class RpnBinaryTreeFactory {
+class RpnTreeFactory {
 
 public:
     Tree *create(std::vector<std::string> expressions) const;
 };
 
 
-#endif //RPNTREE_RPNBINARYTREEFACTORY_H
+#endif //RPNTREE_RPNTREEFACTORY_H

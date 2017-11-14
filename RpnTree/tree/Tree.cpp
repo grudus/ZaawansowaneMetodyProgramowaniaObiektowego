@@ -15,10 +15,10 @@ std::string Tree::prefix(std::string actual, Node *node) {
         return actual;
     
     auto elem = node->getElem();
-    actual += (*elem).toString();
+    actual += (*elem).toString() + " ";
 
-    actual = prefix(actual, node->getLeft());
-    actual = prefix(actual, node->getRight());
+    for (auto child : node->getChildren())
+        actual = prefix(actual, child);
 
     return actual;
 }

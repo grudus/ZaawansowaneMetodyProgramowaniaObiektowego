@@ -1,6 +1,6 @@
-#include "RpnBinaryTreeFactory.h"
+#include "RpnTreeFactory.h"
 
-Tree *RpnBinaryTreeFactory::create(std::vector<std::string> expressions) const {
+Tree *RpnTreeFactory::create(std::vector<std::string> expressions) const {
     std::vector<RpnElem *> elems;
 
     std::transform(expressions.begin(), expressions.end(), std::back_inserter(elems),
