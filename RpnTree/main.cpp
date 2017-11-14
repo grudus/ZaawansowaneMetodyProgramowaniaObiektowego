@@ -20,7 +20,7 @@ int main() {
 
 
     auto x = new Node(new RpnVariable("x"));
-    auto sin = new Node(new RpnOperator("sin"));
+    auto sin = new Node(new RpnOperator("sin", 1));
     sin->addChildren(x);
 
     auto five = new Node(new RpnNumber(5));

@@ -5,11 +5,15 @@ RpnElem *RpnElemFactory::create(const std::string &elem) const {
         new RpnNumber(std::stoi(elem));
 
     if (isOperator(elem))
-        return new RpnOperator(elem);
+        return new RpnOperator(elem, getNumberOfChildren(elem));
 
     return new RpnVariable(elem);
 }
 
+int RpnElemFactory::getNumberOfChildren(const std::string &elem) const {
+    return OPERATORS_TO_CHILDREN.find(elem)->second;
+}
+
 bool RpnElemFactory::isOperator(const std::string &elem) const {
-    return find(POSSIBLE_OPERATORS.begin(), POSSIBLE_OPERATORS.end(), elem) != POSSIBLE_OPERATORS.end();
+    return OPERATORS_TO_CHILDREN.find(elem) != OPERATORS_TO_CHILDREN.end();
 }

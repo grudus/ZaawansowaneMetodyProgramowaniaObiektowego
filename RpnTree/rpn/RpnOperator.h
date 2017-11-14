@@ -6,6 +6,7 @@
 
 class RpnOperator : public RpnElem {
 public:
+    RpnOperator(std::string _operator, int numberOfChildren);
     explicit RpnOperator(std::string _operator);
     bool isOperator() override;
     std::string getOperator();
@@ -14,6 +15,7 @@ public:
 
 private:
     const std::string oper;
+    const int numberOfChildren;
 };
 
 
