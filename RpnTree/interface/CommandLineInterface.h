@@ -2,9 +2,13 @@
 #define RPNTREE_COMMANDLINEINTERFACE_H
 
 
+#include "../tree/Tree.h"
+
 class CommandLineInterface {
 public:
     void showMenu();
+
+    bool readInput(Tree **tree);
 };
 
 

@@ -1,18 +1,14 @@
 #include "StringUtils.h"
 
-template<typename Out>
-void split(const std::string &s, char delim, Out result) {
-    std::stringstream ss(s);
-    std::string item;
-    while (std::getline(ss, item, delim)) {
-        *(result++) = item;
-    }
-}
 
-std::vector<std::string> split(const std::string &s, char delim) {
-    std::vector<std::string> elems;
-    split(s, delim, std::back_inserter(elems));
-    return elems;
+std::vector<std::string> split(std::string &string, const std::string &regexString) {
+    std::regex regex(regexString);
+
+    std::sregex_token_iterator
+            first{string.begin(), string.end(), regex, -1},
+            last;
+
+    return {first, last};
 }
 
 void ltrim(std::string &s) {

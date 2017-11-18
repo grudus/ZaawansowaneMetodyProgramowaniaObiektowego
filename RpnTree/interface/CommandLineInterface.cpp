@@ -1,6 +1,10 @@
 
 #include <iostream>
 #include "CommandLineInterface.h"
+#include "instructions/EnterInstruction.h"
+#include "instructions/PrintInstruction.h"
+#include "instructions/VariableInstruction.h"
+#include "instructions/ComputeInstruction.h"
 
 void CommandLineInterface::showMenu() {
     std::cout << "*** enter <formula> - wykonanie powoduje próbę stworzenia drzewa na podstawie podanego\n"
@@ -22,5 +26,25 @@ void CommandLineInterface::showMenu() {
             "*** join <formula> - wykonanie powoduje próbę stworzenia drzewa na podstawie podanego\n"
             "wyrażenia. Następnie stworzone drzewo jest doklejane do istniejącego drzewa. Patrz punkt 2\n"
             "na stronie 3. Do wykonania tej komendy należy użyć operatorów „+” i „=”, zgodnie z opisem\n"
-            "podanym w wymaganiach dotyczących implementacji." << std::endl;
+            "podanym w wymaganiach dotyczących implementacji.\n" << std::endl;
+}
+
+bool CommandLineInterface::readInput(Tree **tree) {
+    std::string instruction;
+    std::cin >> instruction;
+
+    std::transform(instruction.begin(), instruction.end(), instruction.begin(), ::tolower);
+
+    if (instruction == "enter") {
+        handleEnterInstruction(tree);
+    } else if (instruction == "print") {
+        handlePrintInstruction(*tree);
+    } else if (instruction == "vars") {
+        handleVariableInstruction(*tree);
+    } else if (instruction == "comp") {
+        handleComputeInstruction(*tree);
+    } else if (instruction == "exit")
+        return false;
+
+    return true;
 }

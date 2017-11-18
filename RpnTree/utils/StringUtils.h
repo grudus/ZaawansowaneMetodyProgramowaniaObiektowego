@@ -2,16 +2,13 @@
 #define RPNTREE_STRINGUTILS_H
 
 #include <string>
-#include <sstream>
 #include <vector>
 #include <iterator>
 #include <algorithm>
+#include <regex>
 
-std::vector<std::string> split(const std::string &s, char delim);
 
-
-template<typename Out>
-void split(const std::string &s, char delim, Out result);
+std::vector<std::string> split(std::string &string, const std::string &);
 
 void ltrim(std::string &s);
 
