@@ -1,8 +1,6 @@
 #include <iostream>
 #include "tree/Tree.h"
-#include "rpn/RpnVariable.h"
 #include "tree/RpnTreeFactory.h"
-#include "tree/RpnTreeSolver.h"
 
 int main() {
     auto expr = split("+ / 1 2 * + a c 8", ' ');
@@ -13,14 +11,15 @@ int main() {
             {"b", 3}
     };
 
+    auto root = tree->getRoot();
 
-    std::cout << tree->prefixToString() << std::endl;
+    Node dupa(nullptr);
 
-    Errorable<double> *pErrorable = RpnTreeSolver().solve(tree, variables);
-    if (pErrorable->isError())
-        std::cerr << "ERROR OCCURED: " << pErrorable->getErrorCode() << std::endl;
-    else
-        std::cout << pErrorable->getValue() << std::endl;
+    dupa = *root;
+
+    delete root;
+
+    std::cout << Tree(&dupa).prefixToString() << std::endl;
 
     return 0;
 }
