@@ -3,6 +3,7 @@
 
 #include <string>
 #include "Node.h"
+#include <set>
 
 class Tree {
 public:
@@ -20,6 +21,7 @@ public:
 
     Tree operator+(const Tree &tree);
 
+    std::set<std::string> findVariables();
 
 private:
     Node *root;
@@ -29,6 +31,8 @@ private:
     void printInOrder(Node *pNode);
 
     Node *findLastChild(Node *pNode);
+
+    std::set<std::string> findVariables(std::set<std::string> variables, Node *node);
 };
 
 

@@ -5,6 +5,7 @@
 #include <sstream>
 #include <vector>
 #include <iterator>
+#include <algorithm>
 
 std::vector<std::string> split(const std::string &s, char delim);
 
@@ -12,5 +13,6 @@ std::vector<std::string> split(const std::string &s, char delim);
 template<typename Out>
 void split(const std::string &s, char delim, Out result);
 
+void ltrim(std::string &s);
 
 #endif //RPNTREE_STRINGUTILS_H

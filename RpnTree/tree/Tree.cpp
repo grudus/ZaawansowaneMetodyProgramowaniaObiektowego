@@ -67,3 +67,20 @@ Node *Tree::findLastChild(Node *pNode) {
         return pNode;
     return findLastChild(pNode->children[0]);
 }
+
+std::set<std::string> Tree::findVariables() {
+    return findVariables(std::set<std::string>(), root);
+}
+
+std::set<std::string> Tree::findVariables(std::set<std::string> variables, Node *node) {
+    if (node == nullptr)
+        return variables;
+
+    if (node->elem->getType() == RpnElem::Type::VARIABLE)
+        variables.insert(node->elem->toString());
+
+    for (auto child : node->children)
+        variables = findVariables(variables, child);
+
+    return variables;
+}
