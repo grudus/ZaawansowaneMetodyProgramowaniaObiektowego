@@ -2,10 +2,6 @@
 
 #include <utility>
 
-bool RpnOperator::isOperator() const {
-    return true;
-}
-
 std::string RpnOperator::getOperator() {
     return oper;
 }
@@ -22,4 +18,8 @@ RpnOperator::RpnOperator(std::string _operator)
 
 int RpnOperator::getNumberOfChildren() const {
     return numberOfChildren;
+}
+
+RpnElem::Type RpnOperator::getType() const {
+    return RpnElem::Type::OPERATOR;
 }

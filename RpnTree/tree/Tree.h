@@ -10,6 +10,7 @@ public:
 
     std::string prefixToString();
 
+    Node *getRoot() const;
 
 
 private:

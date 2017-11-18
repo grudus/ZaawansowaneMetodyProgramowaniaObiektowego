@@ -9,11 +9,12 @@ public:
     RpnOperator(std::string _operator, int numberOfChildren);
     explicit RpnOperator(std::string _operator);
 
-    bool isOperator() const override;
     std::string getOperator();
 
     int getNumberOfChildren() const;
     std::string toString() const override;
+
+    Type getType() const override;
 
 private:
     const std::string oper;

@@ -22,3 +22,7 @@ std::string Tree::prefix(std::string actual, Node *node) {
 
     return actual;
 }
+
+Node *Tree::getRoot() const {
+    return root;
+}

@@ -9,8 +9,9 @@ class RpnVariable : public RpnElem {
 public:
     explicit RpnVariable(std::string variable): var(std::move(variable)) {}
 
-    bool isOperator() const override;
     std::string toString() const override;
+
+    Type getType() const override;
 
 private:
     const std::string var;
