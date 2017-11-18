@@ -11,15 +11,14 @@ int main() {
             {"b", 3}
     };
 
-    auto root = tree->getRoot();
 
-    Node dupa(nullptr);
+    Tree tree2(nullptr);
 
-    dupa = *root;
+    tree2 = *tree;
 
-    delete root;
+    delete tree;
 
-    std::cout << Tree(&dupa).prefixToString() << std::endl;
+    std::cout << tree2.prefixToString() << std::endl;
 
     return 0;
 }

@@ -26,3 +26,12 @@ std::string Tree::prefix(std::string actual, Node *node) {
 Node *Tree::getRoot() const {
     return root;
 }
+
+Tree &Tree::operator=(const Tree &tree) {
+    this->root = new Node(*tree.root);
+    return *this;
+}
+
+Tree::Tree(const Tree &tree) {
+    this->root = new Node(*tree.root);
+}

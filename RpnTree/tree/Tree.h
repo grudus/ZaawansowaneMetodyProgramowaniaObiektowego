@@ -8,18 +8,21 @@ class Tree {
 public:
     explicit Tree(Node *root);
 
+    Tree(const Tree &tree);
+
     std::string prefixToString();
 
     Node *getRoot() const;
 
+    Tree &operator=(const Tree &tree);
+
 
 private:
-    Node* root;
+    Node *root;
 
-    std::string prefix(std::string actual, Node* node);
+    std::string prefix(std::string actual, Node *node);
 
 };
-
 
 
 #endif //RPNTREE_TREE_H
