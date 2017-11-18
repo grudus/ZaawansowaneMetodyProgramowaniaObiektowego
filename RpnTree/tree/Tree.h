@@ -12,9 +12,13 @@ public:
 
     std::string prefixToString();
 
+    void printInOrder();
+
     Node *getRoot() const;
 
     Tree &operator=(const Tree &tree);
+
+    Tree operator+(const Tree &tree);
 
 
 private:
@@ -22,6 +26,9 @@ private:
 
     std::string prefix(std::string actual, Node *node);
 
+    void printInOrder(Node *pNode);
+
+    Node *findLastChild(Node *pNode);
 };
 
 

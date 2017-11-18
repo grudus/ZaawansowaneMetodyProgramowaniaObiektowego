@@ -3,7 +3,7 @@
 #include "tree/RpnTreeFactory.h"
 
 int main() {
-    auto expr = split("+ / 1 2 * + a c 8", ' ');
+    auto expr = split("+ * 5 sin x * + a b 8", ' ');
     auto tree = RpnTreeFactory().create(expr);
     std::map<std::string, double> variables = {
             {"x", M_PI / 2},
@@ -12,13 +12,15 @@ int main() {
     };
 
 
-    Tree tree2(nullptr);
+    auto tree2 = RpnTreeFactory().create(split("+ 1 2", ' '));
 
-    tree2 = *tree;
+    auto tree3 = *tree + *tree2;
 
-    delete tree;
+    std::cout << tree->prefixToString() << std::endl;
+    std::cout << tree2->prefixToString() << std::endl;
+    std::cout << tree3.prefixToString() << std::endl;
 
-    std::cout << tree2.prefixToString() << std::endl;
+    tree3.printInOrder();
 
     return 0;
 }
