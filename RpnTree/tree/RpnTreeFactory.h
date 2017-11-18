@@ -15,6 +15,12 @@ public:
     Tree *create(std::vector<std::string> expressions) const;
 
     void createTree(std::vector<RpnElem *> vector, Node *current) const;
+
+    bool hasEnoughChildren(Node *pNode) const;
+
+    void addNewOperator(const std::vector<RpnElem *> &vector, Node *current, Node *node) const;
+
+    void addVariableOrConstant(const std::vector<RpnElem *> &vector, Node *current, Node *node) const;
 };
 
 

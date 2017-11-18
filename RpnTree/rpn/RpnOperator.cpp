@@ -2,7 +2,7 @@
 
 #include <utility>
 
-bool RpnOperator::isOperator() {
+bool RpnOperator::isOperator() const {
     return true;
 }
 
@@ -19,3 +19,7 @@ std::string RpnOperator::toString() const {
 
 RpnOperator::RpnOperator(std::string _operator)
         : oper(std::move(_operator)), numberOfChildren(2) {}
+
+int RpnOperator::getNumberOfChildren() const {
+    return numberOfChildren;
+}

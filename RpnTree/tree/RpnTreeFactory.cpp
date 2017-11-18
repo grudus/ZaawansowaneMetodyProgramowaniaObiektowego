@@ -18,10 +18,33 @@ void RpnTreeFactory::createTree(std::vector<RpnElem *> vector, Node *current) co
 
     auto head = vector.front();
     auto node = new Node(head);
-    current->addChild(node);
 
     if (head->isOperator())
-        createTree(tail(vector), node);
+        addNewOperator(vector, current, node);
+    else
+        addVariableOrConstant(vector, current, node);
+
+}
+
+void RpnTreeFactory::addVariableOrConstant(const std::vector<RpnElem *> &vector, Node *current, Node *node) const {
+    current->addChild(node);
+    if (hasEnoughChildren(current))
+        createTree(tail(vector), current->getParent());
     else
         createTree(tail(vector), current);
+}
+
+void RpnTreeFactory::addNewOperator(const std::vector<RpnElem *> &vector, Node *current, Node *node) const {
+    if (hasEnoughChildren(current))
+        createTree(vector, current->getParent());
+    else {
+        current->addChild(node);
+        createTree(tail(vector), node);
+    }
+}
+
+bool RpnTreeFactory::hasEnoughChildren(Node *pNode) const {
+    auto elem = pNode->getElem();
+    return elem->isOperator()
+           && ((RpnOperator *) elem)->getNumberOfChildren() == pNode->getChildrenNodesSize();
 }

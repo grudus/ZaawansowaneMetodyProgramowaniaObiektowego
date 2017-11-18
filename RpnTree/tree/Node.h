@@ -8,7 +8,9 @@ class Node {
     friend class Tree;
 
 public:
-    explicit Node(RpnElem *elem) : elem(elem) {}
+    explicit Node(RpnElem *elem) : elem(elem) {
+        parent = nullptr;
+    }
 
     const RpnElem *getElem() const {
         return elem;
@@ -20,10 +22,19 @@ public:
 
     void addChild(Node *child) {
         children.push_back(child);
+        child->parent = this;
     }
 
     std::vector<Node *> getChildren() {
         return children;
+    }
+
+    Node *getParent() {
+        return parent;
+    }
+
+    int getChildrenNodesSize() {
+        return static_cast<int>(children.size());
     }
 
 
@@ -37,6 +48,7 @@ public:
 private:
     RpnElem *elem;
     std::vector<Node *> children;
+    Node *parent;
 };
 
 

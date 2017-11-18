@@ -8,9 +8,11 @@ class RpnOperator : public RpnElem {
 public:
     RpnOperator(std::string _operator, int numberOfChildren);
     explicit RpnOperator(std::string _operator);
-    bool isOperator() override;
+
+    bool isOperator() const override;
     std::string getOperator();
 
+    int getNumberOfChildren() const;
     std::string toString() const override;
 
 private:

@@ -7,7 +7,7 @@ class RpnElem {
 public:
     virtual ~RpnElem() = default;;
 
-    virtual bool isOperator() = 0;
+    virtual bool isOperator() const = 0;
     virtual std::string toString() const = 0;
 };
 

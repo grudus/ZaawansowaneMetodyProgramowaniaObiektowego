@@ -1,6 +1,6 @@
 #include "RpnVariable.h"
 
-bool RpnVariable::isOperator() {
+bool RpnVariable::isOperator() const {
     return false;
 }
 
