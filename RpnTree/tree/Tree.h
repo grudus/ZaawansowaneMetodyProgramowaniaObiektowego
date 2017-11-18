@@ -23,6 +23,8 @@ public:
 
     std::set<std::string> findVariables();
 
+    void repair();
+
 private:
     Node *root;
 
@@ -33,6 +35,9 @@ private:
     Node *findLastChild(Node *pNode);
 
     std::set<std::string> findVariables(std::set<std::string> variables, Node *node);
+
+    void repair(Node *pNode);
+
 };
 
 

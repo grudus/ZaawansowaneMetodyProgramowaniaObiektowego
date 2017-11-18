@@ -12,6 +12,14 @@ void handleEnterInstruction(Tree **tree) {
     ltrim(formula);
     const std::vector<std::string> &expressions = split(formula, "\\s+");
     *tree = RpnTreeFactory().create(expressions);
+
+    (*tree)->repair();
+    auto prefix = (*tree)->prefixToString();
+
+    if (split(prefix, "\\s+") != expressions) {
+        std::cerr << "You entered invalid expression! It will be fixed to: " << std::endl;
+        std::cout << prefix << std::endl;
+    }
 }
 
 

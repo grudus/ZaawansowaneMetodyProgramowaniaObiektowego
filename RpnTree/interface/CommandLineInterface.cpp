@@ -5,6 +5,7 @@
 #include "instructions/PrintInstruction.h"
 #include "instructions/VariableInstruction.h"
 #include "instructions/ComputeInstruction.h"
+#include "instructions/JoinInstruction.h"
 
 void CommandLineInterface::showMenu() {
     std::cout << "*** enter <formula> - wykonanie powoduje próbę stworzenia drzewa na podstawie podanego\n"
@@ -43,6 +44,8 @@ bool CommandLineInterface::readInput(Tree **tree) {
         handleVariableInstruction(*tree);
     } else if (instruction == "comp") {
         handleComputeInstruction(*tree);
+    } else if (instruction == "join") {
+        handleJoinInstruction(tree);
     } else if (instruction == "exit")
         return false;
 

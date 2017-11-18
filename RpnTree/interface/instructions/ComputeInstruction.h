@@ -35,7 +35,7 @@ void handleComputeInstruction(Tree *tree) {
     int i = 0;
     for (auto var: variables) {
         std::string &str = userData[i++];
-        environment.insert({var, std::stoi(str)});
+        environment.insert({var, std::stod(str)});
     }
 
     Errorable<double> *errorableValue = RpnTreeSolver::solve(tree, environment);
