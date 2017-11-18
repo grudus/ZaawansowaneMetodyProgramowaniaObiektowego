@@ -2,5 +2,7 @@
 #define RPNTREE_ERRORCODES_H
 
 #define OK 1
+#define VARIABLE_NOT_EXISTS 2
+#define DIVISION_BY_ZERO 3
 
 #endif //RPNTREE_ERRORCODES_H

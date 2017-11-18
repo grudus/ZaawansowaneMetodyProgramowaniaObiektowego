@@ -4,29 +4,30 @@
 #include "ErrorCodes.h"
 
 template<typename T>
-class ErrorableValue {
+class Errorable {
 
 public:
-    explicit ErrorableValue(T value) {
+    explicit Errorable(T value) {
         this->value = value;
         this->errorCode = false;
+        this->error = false;
     }
 
-    explicit ErrorableValue(int errorCode, bool markAsError) {
+    explicit Errorable(int errorCode, bool markAsError) {
         this->errorCode = errorCode;
         this->error = markAsError;
     }
 
-    static ErrorableValue *fromError(int code) {
-        return new ErrorableValue(code, true);
+    static Errorable *fromError(int code) {
+        return new Errorable(code, true);
     }
 
-    static ErrorableValue *okCode() {
-        return new ErrorableValue(OK, false);
+    static Errorable *okCode() {
+        return new Errorable(OK, false);
     }
 
-    static ErrorableValue *fromValue(T value) {
-        return new ErrorableValue(value);
+    static Errorable *ok(T value) {
+        return new Errorable(value);
     }
 
     T getValue() {

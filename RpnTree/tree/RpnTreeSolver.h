@@ -6,18 +6,20 @@
 #include <cmath>
 #include <utility>
 #include "../rpn/RpnNumber.h"
+#include "../utils/Errorable.h"
 #include "Tree.h"
 
 class RpnTreeSolver {
 public:
 
-    static double solve(Tree *tree, std::map<std::string, double> variables);
+    static Errorable<double> *solve(Tree *tree, std::map<std::string, double> variables);
 
 private:
 
-    static double solve(Node *node, std::map<std::string, double> variables);
+    static Errorable<double> *solve(Node *node, std::map<std::string, double> variables);
 
-    static double calculate(Node *node, const std::map<std::string, double> &variables, const RpnElem *elem);
+    static Errorable<double> *
+    calculate(Node *node, const std::map<std::string, double> &variables, const RpnElem *elem);
 };
 
 

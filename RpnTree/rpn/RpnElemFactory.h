@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 #include "RpnElem.h"
-#include "../utils/ErrorableValue.h"
+#include "../utils/Errorable.h"
 #include "../utils/NumberUtils.h"
 #include "../utils/StringUtils.h"
 #include "RpnNumber.h"
