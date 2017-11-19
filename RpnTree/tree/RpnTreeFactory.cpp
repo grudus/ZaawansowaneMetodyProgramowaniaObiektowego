@@ -13,7 +13,7 @@ Tree *RpnTreeFactory::create(std::vector<std::string> expressions) const {
 }
 
 void RpnTreeFactory::createTree(std::vector<RpnElem *> vector, Node *current) const {
-    if (vector.empty())
+    if (vector.empty() || current == nullptr)
         return;
 
     auto head = vector.front();

@@ -17,7 +17,7 @@ void handleEnterInstruction(Tree **tree) {
     auto prefix = (*tree)->prefixToString();
 
     if (split(prefix, "\\s+") != expressions) {
-        std::cerr << "You entered invalid expression! It will be fixed to: " << std::endl;
+        std::cout << "You entered invalid expression! It will be fixed to: " << std::endl;
         std::cout << prefix << std::endl;
     }
 }
