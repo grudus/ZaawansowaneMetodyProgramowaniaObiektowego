@@ -103,7 +103,9 @@ void Tree::repair(Node *pNode) {
         } else if (delta < 0)
             pNode->children.erase(pNode->children.begin() - delta);
     } else if (pNode->getChildrenNodesSize() > 0) {
-        pNode->children.erase(pNode->children.begin() + pNode->getChildrenNodesSize());
+        for (auto child : pNode->children)
+            delete child;
+        pNode->children.clear();
     }
 
     for (auto child : pNode->children)
