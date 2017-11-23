@@ -17,11 +17,12 @@
 class RpnElemFactory {
 
 public:
-    RpnElem* create(const  std::string& elem) const;
+    RpnElem *create(const std::string &elem) const;
 
 
 private:
     const std::map<std::string, int> OPERATORS_TO_CHILDREN = {
+            {"$",   3},
             {"+",   2},
             {"-",   2},
             {"*",   2},

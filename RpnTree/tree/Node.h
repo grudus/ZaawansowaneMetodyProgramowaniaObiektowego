@@ -9,60 +9,25 @@ class Node {
     friend class Tree;
 
 public:
-    explicit Node(RpnElem *elem) : elem(elem) {
-        parent = nullptr;
-    }
+    explicit Node(RpnElem *elem) : elem(elem), parent(nullptr) {}
 
-    const RpnElem *getElem() const {
-        return elem;
-    }
+    const RpnElem *getElem() const;
 
-    void setElem(RpnElem *elem) {
-        Node::elem = elem;
-    }
+    void setElem(RpnElem *elem);
 
-    void addChild(Node *child) {
-        children.push_back(child);
-        child->parent = this;
-    }
+    void addChild(Node *child);
 
-    std::vector<Node *> getChildren() {
-        return children;
-    }
+    std::vector<Node *> getChildren() const;
 
-    Node *getParent() {
-        return parent;
-    }
+    Node *getParent() const;
 
-    int getChildrenNodesSize() {
-        return static_cast<int>(children.size());
-    }
+    int getChildrenNodesSize() const;
 
-    Node(const Node &node) {
-        if (&node != nullptr) {
-            this->elem = RpnElemFactory().create(node.elem->toString());
-            for (auto child: node.children) {
-                this->children.push_back(new Node(*child));
-            }
-            this->parent = node.parent;
-        }
-    }
+    Node(const Node &node);
 
-    Node &operator=(const Node &node) {
-        parent = new Node(*node.parent);
-        for (auto child : node.children)
-            children.push_back(new Node(*child));
-        elem = RpnElemFactory().create(node.elem->toString());
-        return *this;
-    }
+    Node &operator=(const Node &node);
 
-
-    ~Node() {
-        delete elem;
-        for (auto node : children)
-            delete node;
-        children.clear();
-    }
+    ~Node();
 
 private:
     RpnElem *elem;

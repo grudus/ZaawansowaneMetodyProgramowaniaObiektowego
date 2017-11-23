@@ -4,5 +4,6 @@
 #define OK 1
 #define VARIABLE_NOT_EXISTS 2
 #define DIVISION_BY_ZERO 3
+#define INVALID_OPERATOR 4
 
 #endif //RPNTREE_ERRORCODES_H

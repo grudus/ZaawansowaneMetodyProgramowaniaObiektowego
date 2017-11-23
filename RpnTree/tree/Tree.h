@@ -23,6 +23,8 @@ public:
 
     std::set<std::string> findVariables();
 
+    ~Tree();
+
     void repair();
 
 private:

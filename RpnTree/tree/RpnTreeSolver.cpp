@@ -33,12 +33,10 @@ RpnTreeSolver::calculate(Node *node, const std::map<std::string, double> &variab
         return _value1;
     double value1 = _value1->getValue();
 
-    if (children.size() == 1) {
-        if (elem->toString() == "sin")
-            return Errorable<double>::ok(sin(value1));
-        if (elem->toString() == "cos")
-            return Errorable<double>::ok(cos(value1));
-    }
+    if (elem->toString() == "sin")
+        return Errorable<double>::ok(sin(value1));
+    if (elem->toString() == "cos")
+        return Errorable<double>::ok(cos(value1));
 
     Errorable<double> *_value2 = solve(children[1], variables);
     if (_value2->isError())
@@ -57,4 +55,14 @@ RpnTreeSolver::calculate(Node *node, const std::map<std::string, double> &variab
             return Errorable<double>::fromError(DIVISION_BY_ZERO);
         return Errorable<double>::ok(value1 / value2);
     }
+
+    Errorable<double> *_value3 = solve(children[2], variables);
+    if (_value3->isError())
+        return _value3;
+    double value3 = _value3->getValue();
+
+    if (elem->toString() == "$")
+        return Errorable<double>::ok(value1 * value2 * value3);
+
+    return Errorable<double>::fromError(INVALID_OPERATOR);
 }

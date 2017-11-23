@@ -112,3 +112,6 @@ void Tree::repair(Node *pNode) {
         repair(child);
 }
 
+Tree::~Tree() {
+    delete root;
+}
