@@ -3,7 +3,7 @@
 CiCanCopy::CiCanCopy(): data(new std::string) {}
 
 CiCanCopy::CiCanCopy(std::string string): data(new std::string) {
-    *data = std::move(string);
+    *data = string;
 }
 
 CiCanCopy::CiCanCopy(const CiCanCopy &ref): data(new std::string) {
@@ -16,7 +16,7 @@ CiCanCopy &CiCanCopy::operator=(const CiCanCopy &ref) {
 }
 
 CiCanCopy &CiCanCopy::operator=(std::string string) {
-    *data = std::move(string);
+    *data = string;
     return *this;
 }
 
