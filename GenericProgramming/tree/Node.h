@@ -11,6 +11,8 @@ class Node {
 public:
     explicit Node(RpnElem *elem) : elem(elem), parent(nullptr) {}
 
+    Node(const Node &node);
+
     const RpnElem *getElem() const;
 
     void setElem(RpnElem *elem);
@@ -22,8 +24,6 @@ public:
     Node *getParent() const;
 
     int getChildrenNodesSize() const;
-
-    Node(const Node &node);
 
     Node &operator=(const Node &node);
 

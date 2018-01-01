@@ -13,6 +13,7 @@
 #include "RpnNumber.h"
 #include "RpnOperator.h"
 #include "RpnVariable.h"
+#include "operators.h"
 
 class RpnElemFactory {
 
@@ -21,15 +22,6 @@ public:
 
 
 private:
-    const std::map<std::string, int> OPERATORS_TO_CHILDREN = {
-            {"$",   3},
-            {"+",   2},
-            {"-",   2},
-            {"*",   2},
-            {"/",   2},
-            {"sin", 1},
-            {"cos", 1}
-    };
 
     bool isOperator(const std::string &elem) const;
 

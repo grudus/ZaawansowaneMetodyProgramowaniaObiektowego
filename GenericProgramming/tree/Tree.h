@@ -27,7 +27,7 @@ public:
 
     void repair();
 
-private:
+protected:
     Node *root;
 
     std::string prefix(std::string actual, Node *node);
