@@ -62,6 +62,7 @@ void GenericTree::changeLeafToNode(Node **pNode) {
             newNode->addChild(child);
         }
         newNode->addAsParent(currentNode->getParent());
+        delete currentNode;
         **pNode = *newNode;
 
     }
