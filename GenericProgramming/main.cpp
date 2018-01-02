@@ -2,6 +2,7 @@
 #include "rpn/RpnElemFactory.h"
 #include "tree/RpnTreeFactory.h"
 #include "generic-tree/GenericTree.h"
+#include "tree/RpnTreeSolver.h"
 
 int main() {
     std::cout << "Hello, World!" << std::endl;
@@ -16,6 +17,13 @@ int main() {
     auto genericTree = GenericTree(tree->getRoot()).mutate();
     std::cout << std::endl << std::endl;
     genericTree.printInOrder();
+    std::cout << "\n";
+
+    std::map<std::string, double> env = {{"x", 1}, {"y", 1}};
+
+    auto result = RpnTreeSolver().solve((Tree*) &genericTree, env);
+
+    std::cout << result->getValue() << std::endl;
 
     return 0;
 }

@@ -23,6 +23,8 @@ public:
 
     Node *getParent() const;
 
+    void addAsParent(Node* node);
+
     int getChildrenNodesSize() const;
 
     Node &operator=(const Node &node);

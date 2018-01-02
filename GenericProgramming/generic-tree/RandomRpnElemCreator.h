@@ -16,8 +16,10 @@ public:
         srand(time(nullptr));
     }
 
-
     RpnElem *randomElem(const RpnElem *type);
+    RpnOperator * randomOperator();
+
+    RpnElem *createVarOrConst();
 
 private:
     const std::string randomOperator(int numberOfChildren);
