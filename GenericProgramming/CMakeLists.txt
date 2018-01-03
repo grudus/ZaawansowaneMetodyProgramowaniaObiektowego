@@ -12,6 +12,6 @@ set(SOURCE_FILES utils/Errorable.h utils/ErrorCodes.h  utils/NumberUtils.h utils
         tree/RpnTreeSolver.cpp
         tree/RpnTreeSolver.h
         generic-tree/GenericTree.cpp generic-tree/GenericTree.h generic-tree/RandomRpnElemCreator.cpp generic-tree/RandomRpnElemCreator.h
-        main.cpp)
+        main.cpp FunctionXY.cpp FunctionXY.h FunctionFileReader.cpp FunctionFileReader.h)
 
 add_executable(GenericProgramming ${SOURCE_FILES})

@@ -4,6 +4,8 @@
 #include "generic-tree/GenericTree.h"
 #include "tree/RpnTreeSolver.h"
 #include "generic-tree/RandomRpnElemCreator.h"
+#include "FunctionXY.h"
+#include "FunctionFileReader.h"
 
 
 GenericTree *createRandomTree() {
@@ -27,19 +29,22 @@ std::vector<GenericTree*> initialize(int Np) {
 }
 
 int main() {
-    srand(time(0));
+    srand(time(nullptr));
     std::cout << "Hello, World!" << std::endl;
 
-    std::string expression = "* x 2";
-    auto vector1 = split(expression, "\\s+");
-    auto tree = RpnTreeFactory().create(vector1);
 
-    const int Np = 200;
+    auto path = "/home/grudus/CLionProjects/ZaawansowaneMetodyProgramowaniaObiektowego/GenericProgramming/resources/ZMPO_lista_4_02_3_punkty.txt";
+    auto dupa =    FunctionFileReader(path).read();
 
-    std::vector<GenericTree*> population = initialize(Np);
 
-    for (auto aTree: population)
-        aTree->printPrefixed();
+//    const int Np = 200;
+//
+//    std::vector<GenericTree*> population = initialize(Np);
+//
+//    for (auto aTree: population)
+//        aTree->printPrefixed();
+
+
 
     return 0;
 }
