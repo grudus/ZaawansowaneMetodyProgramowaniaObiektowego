@@ -9,6 +9,8 @@
 class GenericTree: public Tree {
 
 public:
+    GenericTree();
+
     GenericTree(Node *root);
     GenericTree(const Tree &tree);
 
@@ -20,7 +22,7 @@ public:
 
     void changeLeafOrNodeToNode(Node **pNode);
 
-    void changeNodeToLeaf(Node **pNode);
+    std::pair<GenericTree, GenericTree> cross(const GenericTree& other);
 };
 
 

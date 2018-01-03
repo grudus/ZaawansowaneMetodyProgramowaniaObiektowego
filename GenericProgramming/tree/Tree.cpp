@@ -36,6 +36,11 @@ Tree::Tree(const Tree &tree) {
     this->root = new Node(*tree.root);
 }
 
+
+Tree::Tree() {
+    root = nullptr;
+}
+
 void Tree::printInOrder() {
     printInOrder(root);
 }

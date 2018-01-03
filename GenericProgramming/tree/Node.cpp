@@ -53,3 +53,11 @@ Node::~Node() {
         delete node;
     children.clear();
 }
+
+void Node::removeFirstChild() {
+    children.erase(children.begin());
+}
+
+void Node::removeLastChild() {
+    children.pop_back();
+}

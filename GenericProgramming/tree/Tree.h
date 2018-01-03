@@ -11,6 +11,8 @@ public:
 
     Tree(const Tree &tree);
 
+    Tree();
+
     std::string prefixToString();
 
     void printInOrder();

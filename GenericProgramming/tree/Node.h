@@ -29,6 +29,10 @@ public:
 
     ~Node();
 
+    void removeFirstChild();
+
+    void removeLastChild();
+
 private:
     RpnElem *elem;
     std::vector<Node *> children;

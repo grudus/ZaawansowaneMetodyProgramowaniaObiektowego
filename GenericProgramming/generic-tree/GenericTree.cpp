@@ -10,6 +10,11 @@ GenericTree::GenericTree(const Tree &tree) : Tree(tree) {
     srand(time(nullptr));
 }
 
+
+GenericTree::GenericTree() {
+    srand(time(nullptr));
+}
+
 GenericTree GenericTree::mutate() {
     GenericTree tree = GenericTree(*this);
 
@@ -23,7 +28,6 @@ GenericTree GenericTree::mutate() {
         case 0: tree.changeLeafToLeaf(root);
         case 1:
             tree.changeLeafOrNodeToNode(&root);
-        case 2: tree.changeNodeToLeaf(&root);
     }
 
     tree.setRoot(root);
@@ -73,8 +77,20 @@ void GenericTree::changeLeafOrNodeToNode(Node **pNode) {
     }
 }
 
-void GenericTree::changeNodeToLeaf(Node **pNode) {
+std::pair<GenericTree, GenericTree> GenericTree::cross(const GenericTree &other) {
+    auto firstChild = new Node(*getRoot()->getChildren()[0]);
+    auto otherChildren = other.getRoot()->getChildren();
+    auto lastChild = new Node(*otherChildren.back());
 
+
+    GenericTree tree1(*this), tree2(other);
+
+    tree1.getRoot()->removeFirstChild();
+    tree1.getRoot()->addChild(lastChild);
+    tree2.getRoot()->removeLastChild();
+    tree2.getRoot()->addChild(firstChild);
+
+    return {tree1, tree2};
 }
 
 

@@ -25,5 +25,23 @@ int main() {
 
     std::cout << result->getValue() << std::endl;
 
+
+
+    expression = "+ + 3 x - 4 / y 2";
+    vector1 = split(expression, "\\s+");
+    auto tree2 = GenericTree(RpnTreeFactory().create(vector1)->getRoot());
+
+    expression = "* / + 2 1 x * 1 y";
+    vector1 = split(expression, "\\s+");
+    auto tree1 = GenericTree(RpnTreeFactory().create(vector1)->getRoot());
+
+    tree1.printPrefixed();
+    tree2.printPrefixed();
+
+    auto crossed = tree1.cross(tree2);
+
+    crossed.first.printPrefixed();
+    crossed.second.printPrefixed();
+
     return 0;
 }
