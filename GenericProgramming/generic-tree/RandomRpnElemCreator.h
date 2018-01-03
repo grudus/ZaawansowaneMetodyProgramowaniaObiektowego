@@ -12,10 +12,6 @@
 class RandomRpnElemCreator {
 
 public:
-    RandomRpnElemCreator() {
-        srand(time(nullptr));
-    }
-
     RpnElem *randomElem(const RpnElem *type);
     RpnOperator * randomOperator();
 

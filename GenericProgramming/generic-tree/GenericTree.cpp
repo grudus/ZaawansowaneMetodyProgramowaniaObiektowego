@@ -2,18 +2,11 @@
 #include "GenericTree.h"
 #include "RandomRpnElemCreator.h"
 
-GenericTree::GenericTree(Node *root) : Tree(root) {
-    srand(time(nullptr));
-}
+GenericTree::GenericTree(Node *root) : Tree(root) {}
 
-GenericTree::GenericTree(const Tree &tree) : Tree(tree) {
-    srand(time(nullptr));
-}
+GenericTree::GenericTree(const Tree &tree) : Tree(tree) {}
 
-
-GenericTree::GenericTree() {
-    srand(time(nullptr));
-}
+GenericTree::GenericTree() {}
 
 GenericTree GenericTree::mutate() {
     GenericTree tree = GenericTree(*this);

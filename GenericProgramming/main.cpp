@@ -3,45 +3,43 @@
 #include "tree/RpnTreeFactory.h"
 #include "generic-tree/GenericTree.h"
 #include "tree/RpnTreeSolver.h"
+#include "generic-tree/RandomRpnElemCreator.h"
+
+
+GenericTree *createRandomTree() {
+    auto creator = RandomRpnElemCreator();
+    auto anOperator = creator.randomOperator();
+    Node* node = new Node(anOperator);
+    for (int i = 0; i < anOperator->getNumberOfChildren(); i++) {
+        auto child = new Node(creator.createVarOrConst());
+        node->addChild(child);
+    }
+    return new GenericTree(node);
+}
+
+std::vector<GenericTree*> initialize(int Np) {
+    std::vector<GenericTree*> trees;
+    for (int i = 0; i < Np; i++) {
+        auto tree = createRandomTree();
+        trees.push_back(tree);
+    }
+    return trees;
+}
 
 int main() {
+    srand(time(0));
     std::cout << "Hello, World!" << std::endl;
 
     std::string expression = "* x 2";
     auto vector1 = split(expression, "\\s+");
     auto tree = RpnTreeFactory().create(vector1);
 
-    tree->printPrefixed();
+    const int Np = 200;
 
+    std::vector<GenericTree*> population = initialize(Np);
 
-    auto genericTree = GenericTree(tree->getRoot()).mutate();
-    std::cout << std::endl << std::endl;
-    genericTree.printPrefixed();
-    std::cout << "\n";
-
-    std::map<std::string, double> env = {{"x", 1}, {"y", 1}};
-
-    auto result = RpnTreeSolver().solve((Tree*) &genericTree, env);
-
-    std::cout << result->getValue() << std::endl;
-
-
-
-    expression = "+ + 3 x - 4 / y 2";
-    vector1 = split(expression, "\\s+");
-    auto tree2 = GenericTree(RpnTreeFactory().create(vector1)->getRoot());
-
-    expression = "* / + 2 1 x * 1 y";
-    vector1 = split(expression, "\\s+");
-    auto tree1 = GenericTree(RpnTreeFactory().create(vector1)->getRoot());
-
-    tree1.printPrefixed();
-    tree2.printPrefixed();
-
-    auto crossed = tree1.cross(tree2);
-
-    crossed.first.printPrefixed();
-    crossed.second.printPrefixed();
+    for (auto aTree: population)
+        aTree->printPrefixed();
 
     return 0;
 }
