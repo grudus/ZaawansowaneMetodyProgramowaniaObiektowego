@@ -14,14 +14,16 @@ GenericTree GenericTree::mutate() {
     GenericTree tree = GenericTree(*this);
 
     std::string mutateTypes[] = {"leafToLeaf", "leafToNode", "nodeToLeaf", "nodeToNode", "switchLeafAndNode", "switchLeafAndLeaf", "switchNodeAndNode"};
-    int index = /*rand() % 7;*/ 1;
+    int index = /*randomFunc() % 7;*/ 1;
 
     auto mutation = mutateTypes[index];
     auto root = tree.getRoot();
 
     switch (index) {
         case 0: tree.changeLeafToLeaf(root);
-        case 1: tree.changeLeafToNode(&root);
+        case 1:
+            tree.changeLeafOrNodeToNode(&root);
+        case 2: tree.changeNodeToLeaf(&root);
     }
 
     tree.setRoot(root);
@@ -46,26 +48,32 @@ void GenericTree::setRoot(Node *root) {
     Tree::root = root;
 }
 
-void GenericTree::changeLeafToNode(Node **pNode) {
+void GenericTree::changeLeafOrNodeToNode(Node **pNode) {
     Node* currentNode = *pNode;
+    bool shouldGoToChildNode = /*randomFunc() % 3 != 0*/true;
+
     int numberOfChildren = currentNode->getChildrenNodesSize();
-    if (numberOfChildren > 0) {
+    if (numberOfChildren > 0 && shouldGoToChildNode) {
         int index = rand() % numberOfChildren;
         Node* child = currentNode->getChildren()[index];
-        changeLeafToNode(&child);
+        changeLeafOrNodeToNode(&child);
     }
     else {
         RpnOperator *anOperator = RandomRpnElemCreator().randomOperator();
         auto newNode = new Node(anOperator);
         for (int i = 0; i < anOperator->getNumberOfChildren(); i++) {
-            Node* child = new Node(RandomRpnElemCreator().createVarOrConst());
+            RpnElem *pElem = RandomRpnElemCreator().createVarOrConst();
+            Node* child = new Node(pElem);
             newNode->addChild(child);
         }
-        newNode->addAsParent(currentNode->getParent());
         delete currentNode;
         **pNode = *newNode;
 
     }
+}
+
+void GenericTree::changeNodeToLeaf(Node **pNode) {
+
 }
 
 

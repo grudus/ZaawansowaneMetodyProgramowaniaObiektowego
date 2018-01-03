@@ -53,7 +53,3 @@ Node::~Node() {
         delete node;
     children.clear();
 }
-
-void Node::addAsParent(Node* node) {
-    parent = node;
-}

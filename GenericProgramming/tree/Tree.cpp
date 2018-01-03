@@ -115,3 +115,7 @@ void Tree::repair(Node *pNode) {
 Tree::~Tree() {
     delete root;
 }
+
+void Tree::printPrefixed() {
+    std::cout << prefixToString() << std::endl;
+}

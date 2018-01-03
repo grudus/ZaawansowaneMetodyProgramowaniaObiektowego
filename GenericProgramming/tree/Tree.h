@@ -21,6 +21,8 @@ public:
 
     Tree operator+(const Tree &tree);
 
+    void printPrefixed();
+
     std::set<std::string> findVariables();
 
     ~Tree();

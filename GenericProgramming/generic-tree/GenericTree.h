@@ -18,7 +18,9 @@ public:
 
     void setRoot(Node *root);
 
-    void changeLeafToNode(Node **pNode);
+    void changeLeafOrNodeToNode(Node **pNode);
+
+    void changeNodeToLeaf(Node **pNode);
 };
 
 

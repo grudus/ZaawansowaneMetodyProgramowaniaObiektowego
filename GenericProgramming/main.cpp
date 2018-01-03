@@ -7,16 +7,16 @@
 int main() {
     std::cout << "Hello, World!" << std::endl;
 
-    std::string expression = "* - x 2 + y 4";
+    std::string expression = "* x 2";
     auto vector1 = split(expression, "\\s+");
     auto tree = RpnTreeFactory().create(vector1);
 
-    tree->printInOrder();
+    tree->printPrefixed();
 
 
     auto genericTree = GenericTree(tree->getRoot()).mutate();
     std::cout << std::endl << std::endl;
-    genericTree.printInOrder();
+    genericTree.printPrefixed();
     std::cout << "\n";
 
     std::map<std::string, double> env = {{"x", 1}, {"y", 1}};
