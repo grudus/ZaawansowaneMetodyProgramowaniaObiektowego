@@ -5,6 +5,7 @@
 #include <string>
 #include <stdlib.h>
 #include "utils/StringUtils.h"
+#include <map>
 
 class FunctionXY {
 public:
@@ -16,6 +17,11 @@ public:
         y = atof(splitted[1].c_str());
         result = atof(splitted[2].c_str());
     }
+
+
+    std::map<std::string, double> getEnv() {
+        return {{"x", x}, {"y", y}};
+    };
 
     double x, y, result;
 };
