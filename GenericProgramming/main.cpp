@@ -66,18 +66,17 @@ int main() {
     srand(time(nullptr));
 
 
-    auto path = "/home/grudus/CLionProjects/ZaawansowaneMetodyProgramowaniaObiektowego/GenericProgramming/resources/ZMPO_lista_4_06_x_y_pl_x_x_noise.txt";
+    auto path = "/home/grudus/CLionProjects/ZaawansowaneMetodyProgramowaniaObiektowego/GenericProgramming/resources/ZMPO_lista_4_03_sin_x.txt";
     auto functions = FunctionFileReader(path).read();
 
     const int Np = 300;
 
     std::vector<GenericTree *> population = initialize(Np);
 
-    //todo rename
     std::vector<double> przystosowanie = findPrzystosowanie(population, functions, Np);
 
     int i = 0;
-    const int Ni = 30;
+    const int Ni = 150;
     const double Pk = 0.5;
     const double Pm = 0.6;
 
@@ -91,11 +90,10 @@ int main() {
             int index1 = (abs(rand()) * populationSize) % populationSize;
             int index2 = (abs(rand()) * populationSize) % populationSize;
 
-            auto tree1 = population[index1];
-            auto tree2 = population[index2];
+            auto treePair = population[index1]->cross(*population[index2]);
 
-            population.push_back(tree1);
-            population.push_back(tree2);
+            population.push_back(&treePair.first);
+            population.push_back(&treePair.second);
 
             population.erase(population.begin() + index1);
             population.erase(population.begin() + index2);
